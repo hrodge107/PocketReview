@@ -1,6 +1,6 @@
 {
   "project": "PocketReview",
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-10",
   "agent_primary": "Antigravity",
   "rules": {
     "single_active_feature": true,
@@ -14,5 +14,141 @@
     "blocked": "Work cannot continue until a documented blocker is resolved.",
     "passing": "Required verification has passed and evidence is recorded."
   },
-  "features": []
+  "features": [
+    {
+      "id": "phone-setup",
+      "priority": 1,
+      "area": "setup",
+      "title": "Prepare and test the phone",
+      "user_visible_behavior": "Download required assets, show truthful progress and retry states, and run local generation on the phone.",
+      "status": "in_progress",
+      "verification": [
+        "On Honor X9c over HTTPS, load the model and inspect supported and absent-answer checks in English and Filipino.",
+        "Disconnect internet, close and reopen the app, and generate with a newly initialized engine using cached assets.",
+        "Export actual device/browser, model/version, output, duration, and failure evidence; desktop checks do not satisfy phone acceptance."
+      ],
+      "evidence": [
+        "2026-10-10: npm ci and npm run verify passed; 5 unit tests and production build.",
+        "2026-10-10: npm run test:browser passed 4 desktop Chrome checks, including simulated worker controls, persistence/export, storage failures, responsive layout and offline app shell. No actual phone inference evidence.",
+        "Detailed observed results and pending phone acceptance: verification/phone-setup.md; phone procedure: README.md."
+      ],
+      "depends": [],
+      "notes": "Domain pattern: Verify local device capability before promising offline AI. Time-box feasibility to approximately 45 minutes; resolve failure before dependent implementation. | Approved OpenSpec change: offline-photo-reviewer-mvp, task group 1."
+    },
+    {
+      "id": "confirm-source",
+      "priority": 2,
+      "area": "source",
+      "title": "Capture and confirm printed source",
+      "user_visible_behavior": "Capture or select up to two photos for one lesson, OCR them locally and sequentially, and confirm editable extracted text beside each image.",
+      "status": "not_started",
+      "verification": [
+        "Process fresh printed-page photos containing English and Filipino text on the phone.",
+        "Retain photos, raw OCR, corrected text, and page references separately; require explicit confirmation.",
+        "Exercise poor/empty OCR recovery and visible rejection or narrowing of oversized input.",
+        "Edit confirmed source and verify older generated items, answers, and quiz progress are invalidated."
+      ],
+      "evidence": [],
+      "depends": [
+        "phone-setup"
+      ],
+      "notes": "Domain pattern: Confirm extracted source before deriving study material. | Separate OpenSpec change will be proposed after dependencies pass."
+    },
+    {
+      "id": "generate-reviewer",
+      "priority": 3,
+      "area": "generation",
+      "title": "Generate a source-linked reviewer",
+      "user_visible_behavior": "Generate and save approximately five short study items in the selected English or Filipino response language, with source-page references and verbatim quotations.",
+      "status": "not_started",
+      "verification": [
+        "Generate items from confirmed corrected text and inspect answer meaning against visible source evidence in both response languages.",
+        "Validate output structure, page IDs, text bounds, and exact quotations; reject malformed or unsupported output.",
+        "Allow at most one bounded retry and verify failed generation preserves previously completed saved work."
+      ],
+      "evidence": [],
+      "depends": [
+        "confirm-source"
+      ],
+      "notes": "Domain pattern: Visible source evidence makes generated study material inspectable; quotation matching alone does not prove answer correctness. | Separate OpenSpec change will be proposed after dependencies pass."
+    },
+    {
+      "id": "study-practice",
+      "priority": 4,
+      "area": "practice",
+      "title": "Practice with cards and a scored quiz",
+      "user_visible_behavior": "Flip cards and complete three multiple-choice questions reused from the study items, with deterministic scoring and source-backed feedback after wrong answers.",
+      "status": "not_started",
+      "verification": [
+        "Flip the generated cards and answer all three quiz questions.",
+        "Check correct and incorrect selections using stable choice IDs; inspect distractors for ambiguity.",
+        "After an incorrect selection, show the correct answer, supporting source, and a short explanation.",
+        "If explanation generation fails, retain the correct answer and source; verify successfully saved quiz progress survives reopening."
+      ],
+      "evidence": [],
+      "depends": [
+        "generate-reviewer"
+      ],
+      "notes": "Domain pattern: Reuse facts across study modes and deterministically score explicit choices. | Separate OpenSpec change will be proposed after dependencies pass."
+    },
+    {
+      "id": "lesson-chat",
+      "priority": 5,
+      "area": "chat",
+      "title": "Ask about the lesson",
+      "user_visible_behavior": "Ask short lesson-grounded questions in English or Filipino, view validated supporting evidence, and receive a clear response when an answer is absent.",
+      "status": "not_started",
+      "verification": [
+        "Ask supported and absent-answer questions in both English and Filipino on the phone and inspect meaning.",
+        "Verify returned page references and quotations against the current confirmed source.",
+        "Reject invalid evidence and exercise understandable busy, failure, and retry states.",
+        "Verify source content is treated as untrusted lesson data and completed work remains available during failures."
+      ],
+      "evidence": [],
+      "depends": [
+        "generate-reviewer"
+      ],
+      "notes": "Domain pattern: Bounded lesson help with visible evidence lets students inspect generated answers. | Separate OpenSpec change will be proposed after dependencies pass."
+    },
+    {
+      "id": "offline-resume",
+      "priority": 6,
+      "area": "offline",
+      "title": "Reopen and create offline",
+      "user_visible_behavior": "Restore one saved lesson and quiz progress and create new review content after cold offline reopening without internet or a running development laptop.",
+      "status": "not_started",
+      "verification": [
+        "Disconnect internet, switch off the laptop, close the app, and reopen it.",
+        "Verify photos, corrected source, generated items, and quiz progress are restored.",
+        "Process fresh photos and run OCR, reviewer generation, quiz feedback, and chat using cached assets.",
+        "Inspect network behavior and verify missing or evicted assets produce truthful readiness and recovery states.",
+        "Simulate failed storage writes and confirm no false saved label; verify cache cleanup preserves model assets."
+      ],
+      "evidence": [],
+      "depends": [
+        "study-practice",
+        "lesson-chat"
+      ],
+      "notes": "Domain pattern: Durable offline sessions preserve study continuity; an already-loaded tab does not demonstrate cold offline readiness. | Separate OpenSpec change will be proposed after dependencies pass."
+    },
+    {
+      "id": "demo-evidence",
+      "priority": 7,
+      "area": "demo",
+      "title": "Reproduce and demonstrate the product",
+      "user_visible_behavior": "Provide reproducible setup instructions, tested limitations, technology disclosures, and a short demonstration of the complete verified flow.",
+      "status": "not_started",
+      "verification": [
+        "Follow documented setup from a clean checkout and run the configured verification commands.",
+        "Record tested phone/browser, package/model revisions, initial download requirements, observed latency, and unresolved limitations.",
+        "Prepare a roughly one-minute demonstration covering fresh capture, correction, generated reviewer, quiz/chat, and offline reopening.",
+        "Verify OpenSpec coverage and UI delivery checks against actual evidence before claiming the MVP complete."
+      ],
+      "evidence": [],
+      "depends": [
+        "offline-resume"
+      ],
+      "notes": "Domain pattern: Reproducible demonstrations and disclosures support honest evaluation. | Separate OpenSpec change will be proposed after dependencies pass."
+    }
+  ]
 }

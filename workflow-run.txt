@@ -1,0 +1,250 @@
+POCKETREVIEW: COPY/PASTE WORKFLOW
+============================================================
+
+RESUME NOTE (2026-10-10)
+The one-time reconciliation and branch creation below are already done.
+phone-setup desktop tasks 1.1-1.3 pass; task 1.4 needs actual Honor X9c
+evidence. Read agent-progress.md and README.md before resuming. Do not
+repeat setup proposals or archive until the phone evidence is inspected.
+
+Use this runbook to complete one approved feature at a time. The
+feature list, product brief, technical spec, OpenSpec change, and
+agent-progress.md are context to inspect, not instructions to ignore
+the active feature's acceptance checks.
+
+IMPORTANT STOP RULE
+-------------------
+Stop when you need me to use the Honor X9c or perform another physical
+phone action. Give me the exact URL, steps, and evidence to return. Leave
+phone-setup in progress until I return with results. Do not start a
+dependent feature while the phone gate is waiting. An app running on my
+laptop does not count as evidence from my phone.
+
+APPROVED FEATURE ORDER
+----------------------
+1. phone-setup
+2. confirm-source
+3. generate-reviewer
+4. study-practice
+5. lesson-chat
+6. offline-resume
+7. demo-evidence
+
+Do one feature per OpenSpec change and one feature per implementation
+commit. Preserve feature dependencies and evidence in feature_list.json.
+Never mark a feature passing until its listed verification actually ran.
+
+
+ONE-TIME REPOSITORY START
+=========================
+
+Run these PowerShell commands at the start of the first run:
+
+    Set-Location -LiteralPath 'C:\Users\User\Desktop\College\MCL\Self Learning\Sideprojects\PocketReview'
+    git status --short
+    git remote -v
+    openspec list --json
+    Get-Content -LiteralPath feature_list.json
+    Get-Content -LiteralPath agent-progress.md
+
+Keep the existing uncommitted work. Review it before staging anything.
+The repo currently has an unfinished umbrella change named
+offline-photo-reviewer-mvp, and its tasks cover all seven features. Before
+the feature-by-feature loop, copy this into Codex:
+
+    $openspec-update-change offline-photo-reviewer-mvp
+
+    Reconcile the existing approved MVP change with the user's
+    feature-by-feature workflow. Keep only phone-setup in this change's
+    proposal, specs, design, and tasks. Preserve the other six approved
+    behaviors in feature_list.json with their current order and
+    dependencies. Update feature notes so future changes have one
+    OpenSpec proposal per feature. Keep the Honor X9c gate ahead of all
+    dependent work. Treat existing package/config scaffolding as
+    unverified. Update agent-progress.md to reflect the files that now
+    exist, the commands that are configured, and checks that have not
+    run. Show the proposed artifact edits before writing them, then
+    follow the skill's write confirmation. Do not implement code.
+
+After that review, start one local work branch. This keeps all approved
+feature commits together while leaving main untouched:
+
+    git switch -c codex/pocketreview-mvp
+
+If that branch already exists, switch to it instead:
+
+    git switch codex/pocketreview-mvp
+
+Inspect the OpenSpec result before proceeding:
+
+    openspec status --change offline-photo-reviewer-mvp --json
+    openspec validate offline-photo-reviewer-mvp --strict
+
+If the validation command does not accept --strict, use the supported
+syntax shown by `openspec validate --help`. Do not ignore validation
+errors.
+
+
+REPEAT THIS CYCLE FOR EACH FEATURE
+==================================
+
+STEP 1: PROPOSE
+---------------
+
+For phone-setup only, continue the existing change after the one-time
+reconciliation above. For each later feature, copy this prompt and replace
+FEATURE_ID with its exact feature_list.json id:
+
+    $openspec-propose FEATURE_ID
+
+    Use only the approved FEATURE_ID entry in feature_list.json and its
+    dependency evidence. Read AGENTS.md, agent-progress.md, the product
+    brief/spec, DESIGN.md, and relevant existing OpenSpec specs. Make one
+    feature-sized change with observable requirements, scenarios,
+    failure behavior, testable acceptance, and scoped tasks. Preserve the
+    confirmed phone-only and bilingual requirements. Apply antislop
+    during planning using the selected study-notebook direction. Do not
+    implement code. Stop with the planning artifacts ready for review.
+
+For phone-setup, the change name is currently offline-photo-reviewer-mvp.
+Its initial planning uses openspec-update-change as listed above. Future
+change names should match their feature IDs.
+
+STEP 2: APPLY
+-------------
+
+Copy this prompt. Replace CHANGE_NAME and FEATURE_ID. Invoke apply in a
+separate Codex message after reviewing the proposal:
+
+    $openspec-apply-change CHANGE_NAME
+
+    Implement only FEATURE_ID, following its approved OpenSpec tasks and
+    feature_list.json verification. First confirm the repo root and
+    feature dependencies. Set only this feature to in_progress. Follow
+    AGENTS.md, the selected UI/design direction, and the relevant
+    antislop, PWA, architecture, and React skills. Make small changes,
+    preserve completed work on errors, run appropriate checks, and record
+    actual evidence in the harness. Keep other features out of scope.
+    If any task needs my Honor X9c, HTTP access to my phone, photography,
+    or another physical action, stop at that point. Give me the exact
+    steps and URL, record the blocker, and leave this feature in_progress.
+    Do not mark it passing, archive it, or begin dependent features until
+    I return with evidence.
+
+For the phone-setup physical check, the expected procedure is:
+
+    1. Open the supplied HTTPS URL on the Honor X9c.
+    2. Record the device variant and browser/version.
+    3. Download the app/model assets and wait for completion.
+    4. Run supported and absent-answer checks in English and Filipino.
+    5. Inspect whether answers are meaningful and source-faithful; save
+       the generated text and observed durations.
+    6. Disconnect internet, close the app, reopen it, and run a fresh
+       generation with a newly initialized model.
+    7. Export/download the evidence and send it back in this chat.
+
+The agent can then resume verification. A `navigator.gpu` result,
+desktop generation, open-tab model, or completed download alone does not
+pass this phone gate.
+
+STEP 3: VERIFY
+--------------
+
+Only after implementation and required manual evidence exist, copy:
+
+    $openspec-verify-change CHANGE_NAME
+
+    Verify every requirement, scenario, task, and design decision against
+    the actual implementation and evidence. Run relevant tests/build/UI
+    checks and antislop's full delivery gate. Keep physical phone checks
+    distinct from desktop checks. List incomplete or unverified checks;
+    repair issues before archive. Never describe a check as passing unless
+    it ran and its result is recorded.
+
+If findings require implementation changes, return to STEP 2 for the same
+feature, then run verification again.
+
+STEP 4: ARCHIVE
+---------------
+
+Only after verification, copy:
+
+    $openspec-archive-change CHANGE_NAME
+
+    Archive this completed feature. Assess and sync its delta spec into
+    the main specs as appropriate. Report archive path, task count, spec
+    sync result, and any warnings. Do not archive a feature that is still
+    waiting on phone evidence.
+
+After archive, ensure feature_list.json has the actual passing status and
+evidence, and agent-progress.md records the verified result and next
+feature. The user may review the archived spec before the commit.
+
+STEP 5: COMMIT AND PUSH
+-----------------------
+
+Ask the skill to write the commit message:
+
+    $caveman-commit
+
+    Write a concise Conventional Commit subject for the completed
+    FEATURE_ID. Use imperative wording and keep it under 50 characters
+    when possible.
+
+Replace STAGED_PATHS with the exact files for this feature, including its
+code, its archived OpenSpec spec, feature_list.json, and agent-progress.md.
+Stage only those paths, then inspect the staged diff:
+
+    git status --short
+    git add -- STAGED_PATHS
+    git diff --cached --check
+    git diff --cached --stat
+    git diff --cached
+
+After reviewing the staged diff, commit using the message returned by
+caveman-commit:
+
+    git commit -m "COMMIT_MESSAGE"
+
+Push the branch. The first push sets its upstream; later pushes use the
+same branch:
+
+    git push --set-upstream origin codex/pocketreview-mvp
+
+For subsequent feature commits, run:
+
+    git push
+
+Do not force-push. If Git reports a conflict or the origin/branch differs,
+stop and resolve it before moving to the next feature.
+
+
+SKILL ROUTING
+=============
+
+- Planning: openspec-explore for uncertain requirements;
+  openspec-propose for each feature; openspec-update-change when an
+  existing feature plan must be reconciled.
+- Implementation: openspec-apply-change is the driver. Use
+  architecture-standards and karpathy-guidelines for substantive code,
+  vercel-react-best-practices for React, and pwa-expert for offline,
+  worker, service-worker, and cache work.
+- Visual work: always use antislop core plus antislop-ui. Add
+  antislop-human and antislop-layoutmobile for interface and phone work;
+  use antislop-copywriting when writing user-facing copy. Apply these
+  during implementation and again at delivery.
+- Verification and closure: openspec-verify-change, the antislop
+  delivery gate, then openspec-archive-change.
+- Commit message: caveman-commit. The skill writes the message; the Git
+  commands above stage, commit, and push.
+- For a difficult bug, use diagnosing-bugs before returning to apply.
+
+
+FINISH LINE
+===========
+
+The MVP is complete only when all seven feature entries are passing with
+real evidence, OpenSpec requirements are synced and archived, setup and
+verification commands work from a clean checkout, and the cold offline
+phone demo is recorded. Keep unverified phone, OCR, language-quality,
+and offline claims explicitly unverified.

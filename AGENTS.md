@@ -37,4 +37,4 @@ Update `agent-progress.md` with verified state, evidence, blockers, and next ste
 
 ## Commands
 
-No install, verify, or start command is currently defined: the repository has no application manifest or source. The attached spec proposes React/Vite/TypeScript but does not establish those dependencies or scripts. Configure real commands after implementation scaffolding exists.
+The setup gate has a pinned application manifest and lockfile. `./init.ps1` (Windows) or `./init.sh` (Git Bash/Linux) installs from the lockfile and verifies the baseline. Stop running Vite processes before clean installation on Windows to release native package locks. Use `npm run dev` for development, `npm run verify` for type checking/tests/production build, and `npm run test:browser` for production browser checks with installed Chrome. Physical phone acceptance remains separate; follow the README phone handoff before marking phone-setup passing.
