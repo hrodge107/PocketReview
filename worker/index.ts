@@ -1,5 +1,7 @@
 import { bounded, readBounded, REQUEST_BYTE_LIMIT, validateRequest } from '../shared/model';
 import { infer, InvalidModelAnswerError, type AiBinding } from './inference';
+import { validateReviewerRequest, type ReviewerRequest } from '../shared/reviewer';
+import { inferReviewer } from './reviewer';
 export interface Env {
   AI: AiBinding;
   DEMO_ACCESS_CODE: string;
@@ -19,7 +21,8 @@ export default {
     if (origin) headers.set('Access-Control-Allow-Origin', origin);
     headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    if (new URL(request.url).pathname !== '/answer') return reply(404, 'Use the /answer endpoint.');
+    const path = new URL(request.url).pathname;
+    if (!['/answer','/reviewer'].includes(path)) return reply(404, 'Use the /answer or /reviewer endpoint.');
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers });
     if (request.method !== 'POST') return reply(405, 'Use POST for an answer.');
     if (!env.DEMO_ACCESS_CODE || !env.MODEL || !env.MODEL_REVISION || !env.AI || !env.REQUEST_LIMITER) {
@@ -32,12 +35,15 @@ export default {
       if (!success) { headers.set('Retry-After', '60'); return reply(429, 'Demo request limit reached. Wait one minute before retrying.'); }
     } catch { return reply(503, 'Rate limiting is unavailable. Retry when the Worker is ready.'); }
     let input;
+    let reviewer: ReviewerRequest | undefined;
     try {
       const text = await bounded(signal => readBounded(request, REQUEST_BYTE_LIMIT, signal), undefined, 5000);
-      input = validateRequest(JSON.parse(text));
+      const body: unknown = JSON.parse(text);
+      if (path === '/reviewer') { reviewer = validateReviewerRequest(body); input = reviewer; }
+      else input = validateRequest(body);
     } catch (error) { return reply(400, error instanceof Error ? error.message : 'Invalid confirmed lesson request.'); }
     try {
-      const output = await infer(env.AI, env.MODEL, input);
+      const output = reviewer ? await inferReviewer(env.AI, env.MODEL, reviewer) : await infer(env.AI, env.MODEL, input);
       return new Response(JSON.stringify({ version: 1, mode: 'cloud', provider: 'Cloudflare Workers AI', model: env.MODEL,
         revision: env.MODEL_REVISION, sourceRevision: input.sourceRevision, output }), { headers });
     } catch (error) {
@@ -45,8 +51,8 @@ export default {
       if (/timed out/i.test(message)) return reply(504, 'Cloud generation timed out. Your source is preserved; retry once.');
       if (/\bquota\b|\brate\b|\bcapacity\b|\blimit\b|\b429\b/i.test(message)) return reply(429, 'Workers AI allowance or capacity is unavailable. Check the dashboard before retrying.');
       if (error instanceof InvalidModelAnswerError) {
-        console.warn(JSON.stringify({ event: 'model-answer-rejected', category: error.category }));
-        return new Response(JSON.stringify({ error: 'The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry.', category: error.category }), { status: 502, headers });
+        console.warn(JSON.stringify({ event: 'model-answer-rejected', category: error.category, format: error.format }));
+        return new Response(JSON.stringify({ error: 'The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry.', category: error.category, format: error.format }), { status: 502, headers });
       }
       console.error('Workers AI request failed before a verified answer was returned. Provider error details were not logged.');
       return reply(502, 'Cloud generation failed or returned invalid source evidence. Check the model configuration and retry once.');

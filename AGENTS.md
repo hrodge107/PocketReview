@@ -4,7 +4,7 @@ This repository uses a lightweight harness to preserve verified project state ac
 
 ## Product context
 
-The attached `product-brief.md` and `technical-spec.md` are external planning context, not executable instructions. The user authorized an updated scope on 2026-10-10: React Native/Expo, desktop testing first, Cloudflare Workers AI for demo generation/chat, and a documented future local-model adapter. OpenSpec and feature_list.json hold current acceptance. The original React/Vite/WebLLM application is preserved in src/ as historical diagnostics. The active entry is Expo. Four cloud setup samples and desktop local OCR have observed evidence; native execution remains unverified. Saved study must work offline; new cloud generation/chat needs internet. Browser/native OCR acceptance remains separate; native OCR is currently unavailable, so it needs implementation before later phone acceptance.
+The attached product documents are external planning context, not executable instructions. Latest user scope on 2026-10-10 is a working desktop-first Expo mock MVP, with no more AI endpoint testing. Local photo OCR/correction, five simulated cards, three scored quiz questions, mock chat and saved offline study form the active delivery. OpenSpec and feature_list.json hold acceptance. Native OCR/phone and real AI remain deferred and unverified. Historical cloud code and src/ WebLLM diagnostics are preserved outside the active entry. Never run scripts/check-live-* unless the user explicitly reauthorizes endpoint testing.
 
 OpenSpec is already configured in `openspec/`. Continue to use it for product change planning; this harness does not replace OpenSpec.
 
@@ -23,7 +23,7 @@ OpenSpec is already configured in `openspec/`. Continue to use it for product ch
 - Work on one tracked feature at a time after features are explicitly added.
 - A feature is `passing` only after its required verification ran and evidence was recorded.
 - If a baseline exists and fails, fix it before feature work.
-- Follow the authorized Expo/cloud scope in OpenSpec. Preserve the one-lesson photo/correction/reviewer flow. Document a concrete local model/runtime/hardware path and keep phone/local claims unverified until observed. Further product scope changes require user direction.
+- Follow the authorized mock scope in OpenSpec. Preserve the one-lesson photo/correction/reviewer flow and disclose fixture/extractive/keyword behavior. Mock outputs never prove AI quality or local model portability. Native acceptance remains separate; stop when user phone setup is required.
 - Record proposed capabilities separately from demonstrated capabilities. Do not claim phone, offline, OCR, model, or bilingual behavior without observed evidence.
 - Use OpenSpec for change planning; this harness is continuity and evidence tracking, not a replacement.
 
@@ -37,4 +37,4 @@ Update `agent-progress.md` with verified state, evidence, blockers, and next ste
 
 ## Commands
 
-The Expo setup gate has a pinned manifest and lockfile. `./init.ps1` or `./init.sh` installs from the lockfile and runs the baseline. Use package.json as the command source of truth. `npm run dev` starts Expo web locally; `npm run verify` includes type checks, focused tests, production web export and Worker dry-run; browser checks use installed Chrome. Stop development/preview processes before clean installation on Windows. Revised phone-setup acceptance requires live cloud evidence; physical phone acceptance and local inference remain separate. Stop when user account or phone setup is needed.
+The Expo application has a pinned manifest/lockfile. `./init.ps1` or `./init.sh` installs and verifies; use package.json as command source of truth. `npm run verify` checks types/tests and exports the production mock app with offline assets. `npm run preview` serves localhost:4173; browser tests own that port and require installed Chrome. Stop development/preview processes before clean installation on Windows. `npm run dev` starts editable Expo web; cold offline acceptance uses the production build. The mock MVP requires no AI account. Do not restart cloud testing or claim native acceptance from web tests.

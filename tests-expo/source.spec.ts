@@ -84,7 +84,7 @@ test('failed source read blocks mutation without replacing the saved lesson', as
     }) as typeof indexedDB.open;
   });
   await page.goto('/'); await page.getByRole('button', { name: 'Show source', exact: true }).click();
-  await expect(page.getByText('Storage read unavailable', { exact: true })).toBeVisible();
+  await expect(page.getByRole('alert')).toHaveText('Storage read unavailable');
   await expect(page.getByRole('button', { name: 'Select photos', exact: true })).toBeDisabled();
   await page.evaluate(() => localStorage.setItem('allow-lesson-read', 'yes'));
   await page.getByRole('button', { name: 'Retry reading lesson', exact: true }).click();

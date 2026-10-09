@@ -9,8 +9,8 @@ beforeEach(() => {
     MODEL: 'test-only-model', MODEL_REVISION: 'test-revision', ALLOWED_ORIGINS: 'http://localhost:8081',
     REQUEST_LIMITER: { limit: vi.fn().mockResolvedValue({ success: true }) } };
 });
-function call(body: unknown = request, auth = true, origin = 'http://localhost:8081') {
-  return worker.fetch(new Request('https://worker.example/answer', { method: 'POST', headers: {
+function call(body: unknown = request, auth = true, origin = 'http://localhost:8081', path = '/answer') {
+  return worker.fetch(new Request(`https://worker.example${path}`, { method: 'POST', headers: {
     'Content-Type': 'application/json', ...(auth ? { Authorization: 'Bearer test-only-code' } : {}), Origin: origin }, body: JSON.stringify(body) }), env);
 }
 it('fails closed for unauthorized, forbidden origins and unconfigured models without inference', async () => {
@@ -18,6 +18,18 @@ it('fails closed for unauthorized, forbidden origins and unconfigured models wit
   expect((await call(request, true, 'https://untrusted.example')).status).toBe(403);
   env.MODEL = ''; expect((await call()).status).toBe(503);
   expect(env.AI.run).not.toHaveBeenCalled();
+});
+
+it('protects reviewer requests and rejects unverifiable study-item evidence', async () => {
+  const reviewer = { ...request, count: 1, previousQuestions: [] };
+  expect((await call(reviewer, false, 'http://localhost:8081', '/reviewer')).status).toBe(401);
+  vi.mocked(env.AI.run).mockResolvedValueOnce({ response: JSON.stringify({ items: [{ question: 'What stops current?', answer: output.answer, evidence: output.evidence }] }) });
+  const accepted = await call(reviewer, true, 'http://localhost:8081', '/reviewer');
+  expect(accepted.status).toBe(200);
+  expect(await accepted.json()).toMatchObject({ mode: 'cloud', output: { items: [{ question: 'What stops current?' }] } });
+  vi.mocked(env.AI.run).mockResolvedValueOnce({ response: JSON.stringify({ items: [{ question: 'What stops current?', answer: output.answer, evidence: [{ pageId: 'page-1', quote: 'Invented fact' }] }] }) });
+  expect((await call(reviewer, true, 'http://localhost:8081', '/reviewer')).status).toBe(502);
+  expect((await call({ ...reviewer, count: 5 }, true, 'http://localhost:8081', '/reviewer')).status).toBe(400);
 });
 it('rejects oversized input and enforces a demo rate limit before generation', async () => {
   expect((await call({ ...request, pages: [{ id: 'p', text: 'x'.repeat(4501) }] })).status).toBe(400);

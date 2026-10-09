@@ -1,0 +1,492 @@
+{
+  "fixture": "Confirmed synthetic biology lesson; not an OCR/camera acceptance check",
+  "source": [
+    {
+      "id": "page-1",
+      "name": "Synthetic biology fixture",
+      "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aRf8AAAAASUVORK5CYII=",
+      "rawText": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis.",
+      "correctedText": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis.",
+      "ocrState": "complete",
+      "error": null
+    }
+  ],
+  "results": [
+    {
+      "language": "English",
+      "observedAt": "2026-10-09T20:35:11.286Z",
+      "elapsedMs": 3467,
+      "success": true,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "items": [
+        {
+          "question": "What is the role of sunlight in photosynthesis?",
+          "answer": "Sunlight provides energy for photosynthesis.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Sunlight provides energy for photosynthesis."
+            }
+          ],
+          "id": "source-1-item-1",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "How do plants release oxygen through photosynthesis?",
+          "answer": "Photosynthesis releases oxygen.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Photosynthesis releases oxygen."
+            }
+          ],
+          "id": "source-1-item-2",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "What enters through stomata in plants?",
+          "answer": "Carbon dioxide enters through stomata.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Carbon dioxide enters through stomata."
+            }
+          ],
+          "id": "source-1-item-3",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "What plants make through photosynthesis?",
+          "answer": "food",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Plants make food through photosynthesis."
+            }
+          ],
+          "id": "source-1-item-4",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "What do leaves do through stomata?",
+          "answer": "Leaves exchange gases through stomata.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Leaves exchange gases through stomata."
+            }
+          ],
+          "id": "source-1-item-5",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "language": "Filipino",
+      "observedAt": "2026-10-09T20:35:14.820Z",
+      "elapsedMs": 3450,
+      "success": true,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "items": [
+        {
+          "question": "Paunang sumusunod sa kung paano ang mga akala ng tanim?",
+          "answer": "Roots absorb water from soil.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Roots absorb water from soil."
+            }
+          ],
+          "id": "source-1-item-1",
+          "language": "Filipino",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "Ang kung paano ang tanim ay nagpapalawak ng energiya?",
+          "answer": "Sunlight provides energy for photosynthesis.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Sunlight provides energy for photosynthesis."
+            }
+          ],
+          "id": "source-1-item-2",
+          "language": "Filipino",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "Paano ang mga halaman nagpapalawak ng diyot?",
+          "answer": "Karbon diyot ay sumasaklaw sa mga stomata.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Carbon dioxide enters through stomata."
+            }
+          ],
+          "id": "source-1-item-3",
+          "language": "Filipino",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "Paano ang chlorophyll nagpapalawak ng liwanag?",
+          "answer": "Ang chlorophyll ay nag-aabsorb ng liwanag.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Chlorophyll absorbs light."
+            }
+          ],
+          "id": "source-1-item-4",
+          "language": "Filipino",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "Paano ang mga tanawin ng mga halaman sa pagitan ng pagkain ng kainin at pagbubukas ng oksygeno?",
+          "answer": "Mga halaman ay gumagawa ng kainin sa pamamagitan ng pagpapalawak ng kainin.\nMga dahon ay nagbabagong mga gas sa pamamagitan ng stomata.\nAng pagpapalawak ng kainin ay nagbibigay-daan sa oksygeno.",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Leaves exchange gases through stomata."
+            }
+          ],
+          "id": "source-1-item-5",
+          "language": "Filipino",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.2-3b-instruct",
+          "modelRevision": "provider-managed-unpinned"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "requests": [
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nChlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nPhotosynthesis releases oxygen.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": []
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What is the role of sunlight in photosynthesis?",
+              "answer": "Sunlight provides energy for photosynthesis.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Sunlight provides energy for photosynthesis."
+                }
+              ]
+            },
+            {
+              "question": "How do plants release oxygen through photosynthesis?",
+              "answer": "Photosynthesis releases oxygen.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Photosynthesis releases oxygen."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nChlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": [
+          "What is the role of sunlight in photosynthesis?",
+          "How do plants release oxygen through photosynthesis?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What enters through stomata in plants?",
+              "answer": "Carbon dioxide enters through stomata.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Carbon dioxide enters through stomata."
+                }
+              ]
+            },
+            {
+              "question": "What plants make through photosynthesis?",
+              "answer": "food",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Plants make food through photosynthesis."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Chlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 1,
+        "previousQuestions": [
+          "What is the role of sunlight in photosynthesis?",
+          "How do plants release oxygen through photosynthesis?",
+          "What enters through stomata in plants?",
+          "What plants make through photosynthesis?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What do leaves do through stomata?",
+              "answer": "Leaves exchange gases through stomata.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Leaves exchange gases through stomata."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nChlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nPhotosynthesis releases oxygen.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": []
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "Paunang sumusunod sa kung paano ang mga akala ng tanim?",
+              "answer": "Roots absorb water from soil.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Roots absorb water from soil."
+                }
+              ]
+            },
+            {
+              "question": "Ang kung paano ang tanim ay nagpapalawak ng energiya?",
+              "answer": "Sunlight provides energy for photosynthesis.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Sunlight provides energy for photosynthesis."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nChlorophyll absorbs light.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nPhotosynthesis releases oxygen."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": [
+          "Paunang sumusunod sa kung paano ang mga akala ng tanim?",
+          "Ang kung paano ang tanim ay nagpapalawak ng energiya?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "Paano ang mga halaman nagpapalawak ng diyot?",
+              "answer": "Karbon diyot ay sumasaklaw sa mga stomata.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Carbon dioxide enters through stomata."
+                }
+              ]
+            },
+            {
+              "question": "Paano ang chlorophyll nagpapalawak ng liwanag?",
+              "answer": "Ang chlorophyll ay nag-aabsorb ng liwanag.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Chlorophyll absorbs light."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nLeaves exchange gases through stomata.\nPhotosynthesis releases oxygen."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 1,
+        "previousQuestions": [
+          "Paunang sumusunod sa kung paano ang mga akala ng tanim?",
+          "Ang kung paano ang tanim ay nagpapalawak ng energiya?",
+          "Paano ang mga halaman nagpapalawak ng diyot?",
+          "Paano ang chlorophyll nagpapalawak ng liwanag?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "Paano ang mga tanawin ng mga halaman sa pagitan ng pagkain ng kainin at pagbubukas ng oksygeno?",
+              "answer": "Mga halaman ay gumagawa ng kainin sa pamamagitan ng pagpapalawak ng kainin.\nMga dahon ay nagbabagong mga gas sa pamamagitan ng stomata.\nAng pagpapalawak ng kainin ay nagbibigay-daan sa oksygeno.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Leaves exchange gases through stomata."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "localInference": "unverified",
+  "semanticReview": "pending agent inspection",
+  "restored": true,
+  "narrowOverflow": false
+}

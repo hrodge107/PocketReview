@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { changedSource, confirmSource, decodeLesson, editSource, emptyLesson, type SourcePage } from './lesson';
 const page: SourcePage = { id: 'page-1', name: 'Printed page', photo: 'data:image/png;base64,YQ==', rawText: 'Raw OCR', correctedText: 'A switch opens the circuit.', ocrState: 'complete', error: null };
 it('source changes invalidate study/chat/progress and require confirmation again', () => {
-  const lesson = { ...confirmSource(changedSource(emptyLesson(), [page])), studyItems: [{ answer: 'old' }], chatAnswers: [{ answer: 'old' }], quizProgress: { question: 'choice' } };
+  const lesson = { ...confirmSource(changedSource(emptyLesson(), [page])), studyItems: Array.from({ length: 5 }, (_, index) => ({ id: `old-${index}`, question: `Old question ${index}`, answer: 'Old answer', evidence: [{ pageId: page.id, quote: page.correctedText }], language: 'English' as const, sourceRevision: 'source-1', provider: 'fixture', model: 'test', modelRevision: '1' })), chatAnswers: [{ answer: 'old' }], quizProgress: { question: 'choice' } };
   const edited = editSource(lesson, page.id, 'A closed switch completes the circuit.');
   expect(edited.revision).toBe(lesson.revision + 1);
   expect(edited.confirmed).toBe(false);

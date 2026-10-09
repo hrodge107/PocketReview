@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { changedSource, confirmSource, editSource, emptyLesson, type Lesson, type SourcePage } from '../shared/lesson';
+import { applyReviewer, changedSource, confirmSource, editSource, emptyLesson, type Lesson, type SourcePage } from '../shared/lesson';
+import type { StudyItem } from '../shared/reviewer';
 import { lessonStore } from './lesson-store';
 import { recognizePhoto } from './ocr';
 import { selectPhotos } from './photos';
+import { demoLesson } from '../shared/mock-study';
 const message = (error: unknown) => error instanceof Error ? error.message : 'The source operation failed. Retry without replacing saved work.';
 export function useLesson() {
   const [lesson, setLesson] = useState(emptyLesson);
@@ -68,6 +70,17 @@ export function useLesson() {
     if (lock.current || !ready || saveError) return;
     try { await persist(confirmSource(current.current)); } catch (cause) { setError(message(cause)); }
   }
-  return { lesson, ready, busy, canCancel: !!controller.current, saved, error, readError, saveError, add, retry, edit, remove, confirm, load,
+  async function saveReviewer(items: StudyItem[], sourceRevision: number) {
+    if (lock.current || !ready || !current.current.confirmed || current.current.revision !== sourceRevision) throw Error('The source changed. Confirm it again before generating a reviewer.');
+    return persist(applyReviewer(current.current, items));
+  }
+  async function loadDemo() { if (ready && !lock.current && !current.current.pages.length) return persist(changedSource(current.current, demoLesson().pages)); }
+  async function saveProgress(itemId: string, choiceId: string) {
+    if (!ready || saveError || lock.current || current.current.quizProgress[itemId] || !current.current.studyItems.some(item => item.id === itemId)) return false;
+    return persist({ ...current.current, quizProgress: { ...current.current.quizProgress, [itemId]: choiceId } });
+  }
+  async function saveChat(answer: unknown) { if (ready && !saveError && current.current.confirmed) return persist({ ...current.current, chatAnswers: [...current.current.chatAnswers.slice(-19), answer] }); }
+  return { lesson, ready, busy, canCancel: !!controller.current, saved, error, readError, saveError, add, retry, edit, remove, confirm, load, saveReviewer, loadDemo, saveProgress, saveChat,
     retrySave: () => persist(current.current), cancel: () => controller.current?.abort() };
 }
+export type LessonState = ReturnType<typeof useLesson>;

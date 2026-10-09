@@ -1,0 +1,399 @@
+{
+  "fixture": "Confirmed synthetic biology lesson; not an OCR/camera acceptance check",
+  "source": [
+    {
+      "id": "page-1",
+      "name": "Synthetic biology fixture",
+      "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aRf8AAAAASUVORK5CYII=",
+      "rawText": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis.",
+      "correctedText": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis.",
+      "ocrState": "complete",
+      "error": null
+    }
+  ],
+  "results": [
+    {
+      "language": "English",
+      "observedAt": "2026-10-09T23:04:03.825Z",
+      "elapsedMs": 12046,
+      "success": true,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "items": [
+        {
+          "question": "What absorbs light in plants?",
+          "answer": "Chlorophyll",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Chlorophyll absorbs light."
+            }
+          ],
+          "id": "source-1-item-1",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "Where do roots absorb water from?",
+          "answer": "soil",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Roots absorb water from soil."
+            }
+          ],
+          "id": "source-1-item-2",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "What makes food in plants?",
+          "answer": "Plants",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Plants make food through photosynthesis."
+            }
+          ],
+          "id": "source-1-item-3",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "Where does carbon dioxide enter plants?",
+          "answer": "stomata",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Carbon dioxide enters through stomata."
+            }
+          ],
+          "id": "source-1-item-4",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+          "modelRevision": "provider-managed-unpinned"
+        },
+        {
+          "question": "What provides energy for photosynthesis?",
+          "answer": "Sunlight",
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Sunlight provides energy for photosynthesis."
+            }
+          ],
+          "id": "source-1-item-5",
+          "language": "English",
+          "sourceRevision": "source-1",
+          "provider": "Cloudflare Workers AI",
+          "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+          "modelRevision": "provider-managed-unpinned"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "language": "Filipino",
+      "observedAt": "2026-10-09T23:04:37.161Z",
+      "elapsedMs": 33260,
+      "success": false,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "items": [],
+      "errors": [
+        "The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry."
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nChlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nPhotosynthesis releases oxygen.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": []
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What absorbs light in plants?",
+              "answer": "Chlorophyll",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Chlorophyll absorbs light."
+                }
+              ]
+            },
+            {
+              "question": "Where do roots absorb water from?",
+              "answer": "soil",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Roots absorb water from soil."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nPhotosynthesis releases oxygen.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": [
+          "What absorbs light in plants?",
+          "Where do roots absorb water from?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What makes food in plants?",
+              "answer": "Plants",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Plants make food through photosynthesis."
+                }
+              ]
+            },
+            {
+              "question": "Where does carbon dioxide enter plants?",
+              "answer": "stomata",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Carbon dioxide enters through stomata."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Leaves exchange gases through stomata.\nPhotosynthesis releases oxygen.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 1,
+        "previousQuestions": [
+          "What absorbs light in plants?",
+          "Where do roots absorb water from?",
+          "What makes food in plants?",
+          "Where does carbon dioxide enter plants?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What provides energy for photosynthesis?",
+              "answer": "Sunlight",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Sunlight provides energy for photosynthesis."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis.\nChlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nPhotosynthesis releases oxygen.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": []
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "Ano ang ginagawa ng mga halaman sa pamamagitan ng fotosintesis?",
+              "answer": "Ang mga halaman ay gumagawa ng pagkain sa pamamagitan ng fotosintesis.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Plants make food through photosynthesis."
+                }
+              ]
+            },
+            {
+              "question": "Sa anong bahagi ng halaman ang nagpapalabas ng oksiheno?",
+              "answer": "Ang mga dahon ang nagpapalabas ng oksiheno.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Photosynthesis releases oxygen."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Chlorophyll absorbs light.\nRoots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata.\nSunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": [
+          "Ano ang ginagawa ng mga halaman sa pamamagitan ng fotosintesis?",
+          "Sa anong bahagi ng halaman ang nagpapalabas ng oksiheno?"
+        ]
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "Ano ang ginagamit ng chlorophyll para sa paggamit ng enerhiya?",
+              "answer": "Liwanag ang ginagamit ng chlorophyll para sa paggamit ng enerhiya.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Chlorophyll absorbs light."
+                }
+              ]
+            },
+            {
+              "question": "Paano nangyayari ang pagpapalaki ng mga halaman?",
+              "answer": "Ang liwanag ng araw ang nagbibigay ng enerhiya para sa pagpapalaki ng mga halaman.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Sunlight provides energy for photosynthesis."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 502,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Roots absorb water from soil.\nLeaves exchange gases through stomata.\nCarbon dioxide enters through stomata."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 1,
+        "previousQuestions": [
+          "Ano ang ginagawa ng mga halaman sa pamamagitan ng fotosintesis?",
+          "Sa anong bahagi ng halaman ang nagpapalabas ng oksiheno?",
+          "Ano ang ginagamit ng chlorophyll para sa paggamit ng enerhiya?",
+          "Paano nangyayari ang pagpapalaki ng mga halaman?"
+        ]
+      },
+      "response": {
+        "error": "The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry.",
+        "category": "duplicate-question"
+      }
+    }
+  ],
+  "localInference": "unverified",
+  "semanticReview": "pending agent inspection",
+  "restored": true,
+  "narrowOverflow": false,
+  "callBudget": {
+    "maxCalls": 7,
+    "forwardedCalls": 7
+  }
+}

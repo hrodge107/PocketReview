@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native';
 import { confirmationError, SOURCE_LIMIT } from '../shared/lesson';
 import { Button, paper, ink } from './controls';
-import { useLesson } from './use-lesson';
-export function SourceScreen({ onBusyChange }: { onBusyChange: (busy: boolean) => void }) {
-  const state = useLesson(); const { width } = useWindowDimensions();
+import type { LessonState } from './use-lesson';
+export function SourceScreen({ state, onBusyChange }: { state: LessonState; onBusyChange: (busy: boolean) => void }) {
+  const { width } = useWindowDimensions();
   useEffect(() => { onBusyChange(!!state.busy); }, [state.busy, onBusyChange]);
   const count = state.lesson.pages.reduce((total, page) => total + page.correctedText.length, 0);
   const reason = confirmationError(state.lesson), busy = !!state.busy;
@@ -48,7 +48,7 @@ export function SourceScreen({ onBusyChange }: { onBusyChange: (busy: boolean) =
         {reason && <Text style={styles.body}>{reason}</Text>}
         <Button primary label={state.lesson.confirmed ? 'Source confirmed' : 'Confirm corrected text'} disabled={busy || !state.ready || !!state.saveError || !!reason || state.lesson.confirmed} onPress={() => void state.confirm()} />
         <Text accessibilityLiveRegion="polite" style={styles.body}>{state.saved ? state.lesson.confirmed ? 'Confirmed source saved on this device.' : 'Draft source saved on this device.' : state.lesson.pages.length ? 'Source is in memory; saving is pending or failed.' : 'No source saved yet.'}</Text>
-        <Text style={styles.small}>Revision {state.lesson.revision}. Reviewer generation is the next feature. Native OCR and camera behavior need later phone verification.</Text>
+        <Text style={styles.small}>Revision {state.lesson.revision}. Open Reviewer after confirming the source. Native OCR and camera behavior need later phone verification.</Text>
       </View>
     </ScrollView>
   </KeyboardAvoidingView>;

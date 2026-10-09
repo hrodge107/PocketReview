@@ -10,7 +10,7 @@ export function Button({ label, accessibilityLabel = label, onPress, disabled = 
   </Pressable>;
 }
 const styles = StyleSheet.create({
-  button: { minHeight: 48, paddingHorizontal: 16, paddingVertical: 12, borderWidth: 1, borderColor: ink, borderRadius: 4, justifyContent: 'center' },
-  text: { color: ink, fontSize: 16, fontWeight: '600' },
+  button: { minHeight: 48, maxWidth: '100%', flexShrink: 1, paddingHorizontal: 16, paddingVertical: 12, borderWidth: 1, borderColor: ink, borderRadius: 4, justifyContent: 'center' },
+  text: { color: ink, fontSize: 16, fontWeight: '600', flexShrink: 1 },
   primary: { backgroundColor: amber, borderColor: amber }, disabled: { opacity: 0.45 }, focused: { borderWidth: 3, paddingHorizontal: 14, paddingVertical: 10 },
 });

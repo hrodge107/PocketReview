@@ -1,62 +1,44 @@
-# PocketReview
+# PocketReview: mock study MVP
 
-Built with Llama (Cloudflare Llama 3.2 3B candidate).
+An Expo/React Native study notebook you can try on desktop now. One lesson, up to two photos, local OCR/correction, five cards, three quiz questions, mock lesson chat and saved progress.
 
-PocketReview uses React Native with Expo. This checkout implements model-service setup and desktop local photo OCR with editable, saved source text. Cards, quiz and lesson chat are tracked later features.
+**No AI account or endpoint is needed.** The active application runs only deterministic mocks. The demo lesson has handcrafted English/Filipino answers. Your own source uses copied excerpts without translation or AI reasoning; mock chat uses limited keyword matching.
 
-Live inference through the local Worker is now verified for four setup samples using Llama 3.2 3B, and the user accepted their meaning and language. External Worker deployment, Android operation and local inference remain unverified. A mock result never counts as live AI evidence.
+## Run it
 
-## Start on desktop
-
-Use Node 24.11 or newer. From this repository:
+Use Node 24.11 or newer and installed Chrome for browser tests. In this repository:
 
 ```powershell
-./init.ps1
-npm run dev
-```
-
-The bootstrap runs `npm ci` and `npm run verify`. Git Bash/Linux can use `./init.sh`. Expo web runs at http://localhost:8081, in mock mode by default. Run four sample checks, compare the answers with the visible source, mark meaning/language and export JSON. The sample circuit lessons are fixtures, not student-uploaded content.
-
-```powershell
-npm run build
+npm ci
+npm run verify
 npm run preview
-npm run test:browser
 ```
 
-The production web export is `dist/`; preview binds only to http://localhost:4173. Close a preview server before running browser tests because those tests start their own server on that port. The current setup export has no offline app-shell cache; cold offline study belongs to the later offline-resume feature.
+Open http://localhost:4173. `verify` runs type checking, unit tests and the production web export, including local OCR and offline assets. It does not call an AI endpoint. `./init.ps1` or `./init.sh` installs/verifies from the pinned lockfile. Stop preview/dev processes before a clean reinstall on Windows.
 
-`npm run verify` runs type checking, focused contract/proxy/storage tests, the production Expo web export and a Worker deployment dry-run. The dry-run bundles code and validates bindings without deploying or running a model. Browser tests use installed Chrome, simulated setup responses and actual local OCR on fresh synthetic printed-page images. Native testing remains separate.
+For editable development, run `npm run dev` (Expo web on localhost:8081). Offline caching is verified against the production build, not Metro development. Native development starts with `npm start`; native OCR is not implemented or device-verified and is outside this desktop mock delivery.
 
-## Capture and correct a source
+Stop preview before running `npm run test:browser`; the test runner owns port 4173. Cloud-era browser files remain historical but the active suite selects local source and mock MVP checks only.
 
-Choose **Show source**, then select up to two PNG, JPEG or WebP photos. Each image must fit within 2 MiB of encoded image data and 12 million pixels; use a smaller crop if rejected. Local OCR runs one page at a time. Compare the photo with corrected text, inspect original OCR and confirm the source. Every page needs text, with at most 4,500 combined characters (about 1,500 tokens using characters/3, a heuristic). Source edits reset confirmation and invalidate derived study material. Save failures preserve the draft and offer retry.
+## Two-minute demo
 
-`npm run ocr:prepare` copies pinned Tesseract worker/API/core assets and checks English/Filipino language hashes from a pinned tessdata_fast revision. Development and production build run it automatically. First preparation requires internet to download about 5.7 MB of language data; subsequent preparation uses verified local files. OCR photos/text are processed in the browser and are not sent to Cloudflare. Worker/core assets add to the static export size. Lesson photos/text use IndexedDB on web, separate from setup evidence and OCR language caches.
+1. In Setup, wait for **Offline ready**, then choose **Try the demo lesson**. It contains typed fixture text and an explicitly labeled image placeholder, not a camera/OCR demonstration. Existing lessons are preserved; this button is disabled when a lesson already exists.
+2. Inspect/edit Source and choose **Confirm corrected text**.
+3. Open Reviewer and choose **Create mock reviewer**. Reveal/hide the five card answers and compare their quotations.
+4. Open Quiz. Answer three questions; a wrong answer shows the correct answer and source. Answers lock after submission and scoring uses stable choice IDs.
+5. Open Chat. Try `Where do roots get water?`, then select Filipino and try `Saan kumukuha ng tubig ang mga ugat?`. Ask `Ilang boltahe ang baterya?` to see the mock not-found behavior.
+6. Close the page, disconnect networking and reopen the same origin. Source, study items, quiz and chat remain. Creating a new mock reviewer resets quiz/chat; changing source invalidates all derived study work.
 
-The native picker and storage adapter exist, but native OCR is explicitly unavailable pending its later implementation/device check. Camera selection, real camera-photo accuracy, native persistence and cold offline app reopening have not been demonstrated by desktop fixture tests.
+To try actual local OCR, select one or two PNG/JPEG/WebP printed-page photos in Source instead. OCR runs sequentially in local Tesseract workers. Correct errors manually. Mock review creation needs five distinct short sentences or lines; long passages should be narrowed. Combined confirmed source is bounded to 4,500 characters, approximately 1,500 tokens by the existing heuristic. Photo payloads are bounded to 2 MiB encoded and 12 million pixels.
 
-## Connect Cloudflare
+## Offline and storage
 
-Follow [the account and Worker handoff](docs/cloudflare-setup.md). The Worker candidate is Llama 3.2 3B; its hosted revision is provider-managed/unpinned. Its documented local path remains untested. Cloudflare account/service tokens must never enter the Expo bundle. Only the public Worker URL may use an Expo public environment variable; the separate demo access code is entered at runtime and stays in memory.
+The first online production visit caches the app and OCR worker/core/English/Filipino files. Only a successful installation reports Offline ready. Failed downloading offers retry; browser storage policy/quota can prevent caching or saving. Never treat an unsaved label as persistence. The lesson lives in IndexedDB; failed reads block changes, and failed writes preserve unsaved work with retry. Clear site data only if you intend to delete your lesson.
 
-Cloud operations send bounded confirmed text and questions to Cloudflare; they require internet. Saved study offline is planned, while cloud generation/chat offline is unavailable. Neither cloud success nor adapter design establishes phone inference.
+## Verified scope and limits
 
-## Future phone and local deployment
+See [mock delivery evidence](verification/mock-mvp.md) and OpenSpec specs for actual checks. Browser OCR fixtures are freshly rendered printed pages, not camera photographs. Honor X9c/native camera, native OCR, app-store installation and real AI quality remain unverified. Chat may miss questions; its not-found response is not proof of absence. Arbitrary source excerpts are not translated.
 
-See [local portability requirements](docs/local-portability.md). Expo web verification does not establish native OCR/storage or model-runtime compatibility. When physical testing is authorized, use a matching Expo Go version for the current pure-JS setup or a development build for native OCR/model modules. Provide a runnable build before requesting human phone setup.
+The failed cloud/model experiments, optional Worker code and old WebLLM diagnostics are retained as historical work. Do not run scripts/check-live-* for this mock delivery. No external Worker deployment or model download is needed. Future real AI is separate work, not hidden behind the mock UI.
 
-`npm start` launches Expo; `npm run android` asks Expo to open Android and requires the user's device/emulator setup. These have not been tested on the Honor X9c. Stop for human setup at that stage.
-
-## Preserved prototype
-
-The original WebLLM diagnostics remain untouched in `src/`, with old Vite configuration and browser tests retained for historical reference. They are excluded from the active Expo entry, TypeScript and test paths. `verification/legacy-vite/` preserves the previous manifest, lockfile, TypeScript/browser configuration and README. Recreate that prototype in a separate checkout/workspace if needed; do not mix its dependencies into the active Expo install. Its evidence database remains untouched and separate from the new `pocketreview-setup-evidence-v2` key.
-
-If reusing an old deployment origin, export historical evidence first and explicitly retire its Vite service worker before serving the new Expo build. An old worker can continue showing the cached prototype. Do not clear unrelated model caches or evidence without preserving needed data.
-
-## Dependency limitations
-
-The initial Expo SDK 57 tree reports 22 npm audit findings inherited from build/configuration tooling, rooted in braces, node-forge and an older uuid dependency. At verification time, the registry exposed no patched braces or node-forge release; npm's forced fix proposed incompatible Expo/React Native downgrades. No forced downgrade was applied. Keep development servers local, monitor upstream fixes, and reevaluate before public development-server exposure or native signing work. The Worker dry-run bundles only the small inference proxy and shared validation code.
-
-## Workflow
-
-OpenSpec owns requirements and tasks, `feature_list.json` owns feature status/evidence and `agent-progress.md` records restart context. Keep one active feature. For each feature: propose, apply, verify, archive, then commit/push. The revised setup feature remains in progress until real bilingual cloud results and complete evidence review exist. Later features get separate changes after dependencies pass.
+Pinned Expo tooling previously reported 22 upstream audit findings (7 moderate, 15 high); no forced incompatible upgrade was performed. Local development/preview servers bind localhost. This prototype stores one lesson per browser origin and has no accounts, synchronization or multiple-lesson manager.

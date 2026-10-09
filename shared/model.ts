@@ -67,13 +67,16 @@ export function validateAnswer(value: unknown, request: ModelRequest): Answer {
   return { answer: value.answer, supported: value.supported, evidence };
 }
 
-export function validateResponse(value: unknown, request: ModelRequest, mode: ExecutionMode): ModelResponse {
+export function validateResponseMetadata(value: unknown, request: ModelRequest, mode: ExecutionMode): Omit<ModelResponse, 'output'> {
   if (!object(value) || value.version !== 1 || value.mode !== mode || value.sourceRevision !== request.sourceRevision ||
     !['provider', 'model', 'revision'].every(key => typeof value[key] === 'string' && (value[key] as string).trim().length > 0 && (value[key] as string).length <= 160)) {
     throw new Error('The service returned mismatched source or deployment metadata.');
   }
   return { version: 1, mode, sourceRevision: request.sourceRevision, provider: value.provider as string,
-    model: value.model as string, revision: value.revision as string, output: validateAnswer(value.output, request) };
+    model: value.model as string, revision: value.revision as string };
+}
+export function validateResponse(value: unknown, request: ModelRequest, mode: ExecutionMode): ModelResponse {
+  return { ...validateResponseMetadata(value, request, mode), output: validateAnswer((value as Record<string, unknown>).output, request) };
 }
 
 export async function bounded<T>(operation: (signal: AbortSignal) => Promise<T>, external?: AbortSignal, timeout = REQUEST_TIMEOUT_MS): Promise<T> {

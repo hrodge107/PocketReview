@@ -19,14 +19,12 @@
       "id": "phone-setup",
       "priority": 1,
       "area": "setup",
-      "title": "Prepare Expo and the model service",
-      "user_visible_behavior": "Start the Expo app on desktop, use an explicitly labeled mock or live Cloudflare model service, and retain setup evidence with a documented future local deployment path.",
+      "title": "Prepare the desktop mock demo",
+      "user_visible_behavior": "Open Expo web with a labeled typed demo or local photo source, without any AI account or endpoint.",
       "status": "passing",
       "verification": [
-        "Verify clean Expo desktop/web setup, configured install/verify/start commands and production build.",
-        "Run live supported and absent-answer checks in English and Filipino; review meaning and retain provider/model/version, actual output, latency and failure evidence. Mock outputs do not pass this gate.",
-        "Verify bounded output, actionable configuration/quota/timeout errors, secret-free client bundles and preserved evidence during storage failure.",
-        "Document model weights/license, compatible local runtime and hardware requirements. Phone/local operation remains unverified until actual device evidence exists."
+        "Start the production app without endpoint configuration; disclose mock behavior and fixture provenance.",
+        "Preserve an existing lesson and verify successful offline preparation plus cache failure/retry."
       ],
       "evidence": [
         "2026-10-10: npm ci and npm run verify passed; 5 unit tests and production build.",
@@ -39,133 +37,136 @@
         "2026-10-10: actual production browser cloud checks, export without access code and cold page reload/persistence passed; verification/live/browser-1791574644380.json. This is online cloud evidence, not offline/phone inference.",
         "2026-10-10: pinned local model/runtime metadata and quantified artifact recorded in verification/model-portability.json; local-serving proposal in docs/local-portability.md. Local execution unverified.",
         "2026-10-10: user confirmed all four live answers are fine; reviewed copy and exact verdict recorded in verification/live/reviewed-browser-1791574644380.json. Original pending-review export preserved. Task 1.4 complete.",
-        "2026-10-10: user approved setup/offline ownership reconciliation; all six production browser checks passed, including offline cloud errors preserving prior results. All five tasks complete; main phone-setup spec synced and strictly validated; change archived at openspec/changes/archive/2026-10-10-offline-photo-reviewer-mvp."
+        "2026-10-10: user approved setup/offline ownership reconciliation; all six production browser checks passed, including offline cloud errors preserving prior results. All five tasks complete; main phone-setup spec synced and strictly validated; change archived at openspec/changes/archive/2026-10-10-offline-photo-reviewer-mvp.",
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
       ],
       "depends": [],
-      "notes": "Revised desktop setup acceptance passed; all five tasks complete with human review and approved scope reconciliation. Audit: verification/openspec-setup-audit.md. Main spec: openspec/specs/phone-setup/spec.md. Archived change: 2026-10-10-offline-photo-reviewer-mvp. Native/phone, external deployment and actual local inference remain unverified. Full saved-study offline behavior remains required by offline-resume."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     },
     {
       "id": "confirm-source",
       "priority": 2,
       "area": "source",
       "title": "Capture and confirm printed source",
-      "user_visible_behavior": "Capture or select up to two photos for one lesson, OCR them locally and sequentially, and confirm editable extracted text beside each image.",
+      "user_visible_behavior": "Select up to two photos, recognize text locally and confirm corrected text beside the retained image.",
       "status": "passing",
       "verification": [
-        "Process fresh English/Filipino printed-page photos locally in the desktop web demo; verify native OCR separately during later phone acceptance.",
-        "Retain photos, raw OCR, corrected text, and page references separately; require explicit confirmation.",
-        "Exercise poor/empty OCR recovery and visible rejection or narrowing of oversized input.",
-        "Edit confirmed source and verify older generated items, answers, and quiz progress are invalidated."
+        "Recognize fresh synthetic English/Filipino printed pages locally; retain photos, raw/corrected text and page IDs.",
+        "Exercise read/write/OCR failures, retry/cancellation, image/page limits and source confirmation.",
+        "Verify source edits invalidate all derived study work."
       ],
       "evidence": [
         "2026-10-10: npm run verify passed typecheck, 16 focused tests, Expo export and Worker dry-run; final build/typecheck passed after native-unavailable disclosure.",
         "2026-10-10: 13 production Chrome checks passed, including actual local English/Filipino OCR on fresh synthetic printed-page images, correction/confirmation/reload, failed reads/writes, cancellation/empty OCR and image/page limits. Actual OCR output and environment: verification/source-ocr-evidence.json.",
         "2026-10-10: desktop/320px source screenshots inspected, overlap corrected, bounding-box and simulated 200% zoom checks passed; detailed scoped OpenSpec/antislop evidence: verification/confirm-source.md. Native OCR/camera, camera-photo accuracy and cold offline shell remain unverified.",
-        "2026-10-10: all six tasks complete; main confirm-source spec synced and strictly validated; archived as 2026-10-10-confirm-source."
+        "2026-10-10: all six tasks complete; main confirm-source spec synced and strictly validated; archived as 2026-10-10-confirm-source.",
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
       ],
       "depends": [
         "phone-setup"
       ],
-      "notes": "Desktop local source acceptance passed. Archived change: 2026-10-10-confirm-source. Local OCR remains required; native OCR implementation and physical-device evidence are later work. Source edits use the shared invalidation boundary. Camera-photo accuracy is not established by synthetic printed-page tests."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     },
     {
       "id": "generate-reviewer",
       "priority": 3,
       "area": "generation",
-      "title": "Generate a source-linked reviewer",
-      "user_visible_behavior": "Generate and save approximately five short study items in the selected English or Filipino response language, with source-page references and verbatim quotations.",
-      "status": "not_started",
+      "title": "Create five source-linked mock cards",
+      "user_visible_behavior": "Create five labeled simulated study items from confirmed source, with fixed bilingual demo answers or copied source excerpts.",
+      "status": "passing",
       "verification": [
-        "Generate items from confirmed corrected text and inspect answer meaning against visible source evidence in both response languages.",
-        "Validate output structure, page IDs, text bounds, and exact quotations; reject malformed or unsupported output.",
-        "Allow at most one bounded retry and verify failed generation preserves previously completed saved work.",
-        "Use the live configured cloud adapter for acceptance; disclose remote text transfer and show connection/quota errors without losing confirmed source."
+        "Validate five distinct bounded items, current revisions, exact quotations, stable IDs and mock identity.",
+        "Verify handcrafted English/Filipino fixtures, insufficient-source errors and truthful save failure/retry without endpoint calls."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: npm run verify passed typecheck, 24 unit tests, Expo production export and Worker dry-run; 17 production Chrome checks passed, including reviewer batching, cancellation, quota preservation, reload and replacement-write recovery.",
+        "2026-10-10: live 3B model structural success is insufficient: reviewer-1791578115605.json failed Filipino meaning review; reviewer-1791578181709.json includes an unsupported soil/carbon-dioxide claim and failed completion. Full evidence and critical blocker: verification/generate-reviewer.md.",
+        "2026-10-10: approved Llama 3.1 8B FP8 evaluation used twelve forwarded endpoint requests; setup samples and English reviewer succeeded, but Filipino grounding and completion failed. Candidate rejected and 3B configuration restored. Evidence: verification/llama-8b-evaluation.md.",
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
+      ],
       "depends": [
         "confirm-source"
       ],
-      "notes": "Domain pattern: Visible source evidence makes generated study material inspectable; quotation matching alone does not prove answer correctness. | Separate OpenSpec change will be proposed after dependencies pass."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     },
     {
       "id": "study-practice",
       "priority": 4,
       "area": "practice",
-      "title": "Practice with cards and a scored quiz",
-      "user_visible_behavior": "Flip cards and complete three multiple-choice questions reused from the study items, with deterministic scoring and source-backed feedback after wrong answers.",
-      "status": "not_started",
+      "title": "Practice cards and a scored quiz",
+      "user_visible_behavior": "Reveal five card answers and complete three deterministic questions with locked choices and correct-answer/source feedback.",
+      "status": "passing",
       "verification": [
-        "Flip the generated cards and answer all three quiz questions.",
-        "Check correct and incorrect selections using stable choice IDs; inspect distractors for ambiguity.",
-        "After an incorrect selection, show the correct answer, supporting source, and a short explanation.",
-        "If explanation generation fails, retain the correct answer and source; verify successfully saved quiz progress survives reopening."
+        "Reveal/hide answers; select wrong/right stable-ID choices and verify score and feedback.",
+        "Restore saved selections/score offline; invalidate progress after source changes or reviewer replacement."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
+      ],
       "depends": [
         "generate-reviewer"
       ],
-      "notes": "Domain pattern: Reuse facts across study modes and deterministically score explicit choices. | Separate OpenSpec change will be proposed after dependencies pass."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     },
     {
       "id": "lesson-chat",
       "priority": 5,
       "area": "chat",
-      "title": "Ask about the lesson",
-      "user_visible_behavior": "Ask short lesson-grounded questions in English or Filipino, view validated supporting evidence, and receive a clear response when an answer is absent.",
-      "status": "not_started",
+      "title": "Ask labeled mock lesson questions",
+      "user_visible_behavior": "Use local keyword lookup with fixed bilingual fixture answers, source quotations and clearly simulated not-found responses.",
+      "status": "passing",
       "verification": [
-        "Ask supported and absent-answer questions in English and Filipino through the live cloud service on desktop and inspect meaning; phone verification occurs later.",
-        "Verify returned page references and quotations against the current confirmed source.",
-        "Reject invalid evidence and exercise understandable busy, failure, and retry states.",
-        "Verify source content is treated as untrusted lesson data and completed work remains available during failures.",
-        "When offline, show that new answers require internet and keep saved study material available."
+        "Verify supported and unmatched fixture questions in English/Filipino with valid evidence or no invented evidence.",
+        "Bound questions/history; persist and restore exchanges, reset after source/reviewer changes and disclose matching limitations."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
+      ],
       "depends": [
         "generate-reviewer"
       ],
-      "notes": "Domain pattern: Bounded lesson help with visible evidence lets students inspect generated answers. | Separate OpenSpec change will be proposed after dependencies pass."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     },
     {
       "id": "offline-resume",
       "priority": 6,
       "area": "offline",
-      "title": "Reopen saved study offline",
-      "user_visible_behavior": "Restore one saved lesson, cards and quiz progress after cold offline reopening; study and score saved questions without internet. Cloud generation and new chat answers require a connection.",
-      "status": "not_started",
+      "title": "Reopen and create study offline",
+      "user_visible_behavior": "Cold-reopen the cached desktop app with saved source/cards/quiz/chat; process new photos and create mock study locally.",
+      "status": "passing",
       "verification": [
-        "Close the production app and reopen with internet disconnected; verify the web shell is available rather than relying on an already-loaded tab.",
-        "Verify saved photos, raw/corrected source, generated items and quiz progress restore; flip cards and deterministically score saved quiz choices offline.",
-        "Verify cloud generation/new chat visibly require internet without erasing saved work. Offline fresh-photo OCR and local generation are outside current acceptance.",
-        "Simulate failed storage writes and confirm no false saved label; verify recovery and source-revision invalidation."
+        "Close the page, disable networking and reopen saved study from the same origin.",
+        "Process a fresh synthetic printed-page image with cached local OCR and create mock cards offline.",
+        "Verify successful-cache readiness, actionable cache retry, scoped cleanup and truthful storage failures."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
+      ],
       "depends": [
         "study-practice",
         "lesson-chat"
       ],
-      "notes": "Scope revised on 2026-10-10: saved study offline; new AI content uses cloud. Native reopening remains a later device check. Separate OpenSpec change after dependencies pass."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     },
     {
       "id": "demo-evidence",
       "priority": 7,
       "area": "demo",
-      "title": "Reproduce and demonstrate the product",
-      "user_visible_behavior": "Provide reproducible setup instructions, tested limitations, technology disclosures, and a short demonstration of the complete verified flow.",
-      "status": "not_started",
+      "title": "Reproduce the mock MVP",
+      "user_visible_behavior": "Provide working setup commands, complete mock demo steps and evidence that distinguishes mocks, real OCR and future phone/AI work.",
+      "status": "passing",
       "verification": [
-        "Follow documented clean checkout setup and configured verification commands.",
-        "Record real provider/model identity, quota observations, desktop environment, latency, internet requirements and limitations; retain historical phone failure evidence separately.",
-        "Prepare a roughly one-minute live demo of photo selection/capture, local OCR, correction, generated reviewer, quiz/chat and saved-content offline reopening. Mock responses cannot count as live AI evidence.",
-        "Perform later physical-phone UI, photo/OCR and persistence acceptance; stop for user setup when needed. Phone inference is deferred and unverified.",
-        "Document model weights/license, quantized artifact where applicable, local serving/runtime procedure and realistic hardware requirements. Distinguish local self-hosting from inference directly on the Honor X9c.",
-        "Verify OpenSpec coverage and applicable antislop delivery checks before claiming completion."
+        "Verify typecheck, unit tests, production export and all active production browser checks.",
+        "Document mock limitations, first online asset caching, desktop environment and actual OCR evidence.",
+        "Complete OpenSpec verification/sync/archive and applicable antislop delivery checks."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: User explicitly approved mock-only MVP with no further AI endpoint testing. Current desktop scope passed typecheck, 28 unit tests, production export and 13 browser checks. Requirement-specific evidence: verification/mock-mvp.md; fresh local OCR: verification/mock-source-ocr-evidence.json. Earlier AI/device results remain historical."
+      ],
       "depends": [
         "offline-resume"
       ],
-      "notes": "Cloud demo is authorized; local deployment potential must have a concrete documented path. No local phone compatibility claim without observed execution. Separate OpenSpec change after dependencies pass."
+      "notes": "Passing applies only to user-approved desktop mock acceptance. Native camera/OCR, Honor X9c execution, real AI quality and local inference remain unverified and outside this delivery. Consolidated final change: 2026-10-10-generate-reviewer; historical scope/evidence preserved."
     }
   ]
 }

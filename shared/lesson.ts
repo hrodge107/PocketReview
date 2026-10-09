@@ -1,4 +1,5 @@
 import { object } from './model';
+import { validateSavedItems, type StudyItem } from './reviewer';
 export const SOURCE_LIMIT = 4500;
 export const PHOTO_LIMIT = 2 * 1024 * 1024;
 export interface SourcePage {
@@ -7,7 +8,7 @@ export interface SourcePage {
 }
 export interface Lesson {
   version: 1; id: 'lesson'; revision: number; confirmed: boolean; pages: SourcePage[];
-  studyItems: unknown[]; chatAnswers: unknown[]; quizProgress: Record<string, string>;
+  studyItems: StudyItem[]; chatAnswers: unknown[]; quizProgress: Record<string, string>;
 }
 export const emptyLesson = (): Lesson => ({ version: 1, id: 'lesson', revision: 0, confirmed: false,
   pages: [], studyItems: [], chatAnswers: [], quizProgress: {} });
@@ -44,5 +45,16 @@ export function decodeLesson(input: unknown): Lesson {
   if (new Set(pages.map(page => page.id)).size !== pages.length) throw Error('Saved page references are duplicated.');
   const lesson = { ...input, pages } as unknown as Lesson;
   if (lesson.confirmed && confirmationError(lesson)) throw Error('Saved confirmation does not match its source.');
-  return lesson;
+  const studyItems = validateSavedItems(input.studyItems, lesson);
+  const quizIds = studyItems.slice(0,3).map(item => item.id);
+  if (Object.entries(lesson.quizProgress).some(([id,choice]) => !quizIds.includes(id) || !quizIds.includes(choice))) throw Error('Saved quiz progress does not match the current reviewer.');
+  if (lesson.chatAnswers.length > 20 || lesson.chatAnswers.some(entry => !object(entry) || entry.mode !== 'mock' ||
+    typeof entry.question !== 'string' || !entry.question.trim() || entry.question.length > 300 || typeof entry.answer !== 'string' || !entry.answer || entry.answer.length > 600 ||
+    !['English','Filipino'].includes(String(entry.language)) || typeof entry.supported !== 'boolean' || !Array.isArray(entry.evidence) || entry.evidence.length > 3 ||
+    entry.evidence.some(e => !object(e) || typeof e.pageId !== 'string' || typeof e.quote !== 'string' || !e.quote || !pages.some(page => page.id === e.pageId && page.correctedText.includes(e.quote as string))) ||
+    (entry.supported ? !entry.evidence.length : !!entry.evidence.length)) || (!lesson.confirmed && lesson.chatAnswers.length)) throw Error('Saved chat does not match the confirmed lesson.');
+  return { ...lesson, studyItems };
+}
+export function applyReviewer(lesson: Lesson, items: StudyItem[]): Lesson {
+  return { ...lesson, studyItems: validateSavedItems(items, lesson), chatAnswers: [], quizProgress: {} };
 }

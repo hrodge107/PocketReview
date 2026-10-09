@@ -1,0 +1,130 @@
+{
+  "fixture": "Confirmed synthetic biology lesson; not an OCR/camera acceptance check",
+  "source": [
+    {
+      "id": "page-1",
+      "name": "Synthetic biology fixture",
+      "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aRf8AAAAASUVORK5CYII=",
+      "rawText": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis.",
+      "correctedText": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis.",
+      "ocrState": "complete",
+      "error": null
+    }
+  ],
+  "results": [
+    {
+      "language": "English",
+      "observedAt": "2026-10-09T20:27:43.060Z",
+      "elapsedMs": 2691,
+      "success": false,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "items": [],
+      "errors": [
+        "The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry."
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": []
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "source-1",
+        "output": {
+          "items": [
+            {
+              "question": "What is the role of sunlight in photosynthesis?",
+              "answer": "Sunlight provides energy for photosynthesis.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Sunlight provides energy for photosynthesis."
+                }
+              ]
+            },
+            {
+              "question": "Where does carbon dioxide enter during photosynthesis?",
+              "answer": "Carbon dioxide enters through stomata.",
+              "evidence": [
+                {
+                  "pageId": "page-1",
+                  "quote": "Carbon dioxide enters through stomata."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "status": 502,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": [
+          "What is the role of sunlight in photosynthesis?",
+          "Where does carbon dioxide enter during photosynthesis?"
+        ]
+      },
+      "response": {
+        "error": "The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry.",
+        "category": "structure"
+      }
+    },
+    {
+      "status": 502,
+      "request": {
+        "version": 1,
+        "sourceRevision": "source-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Plants make food through photosynthesis. Chlorophyll absorbs light. Roots absorb water from soil. Leaves exchange gases through stomata. Carbon dioxide enters through stomata. Photosynthesis releases oxygen. Sunlight provides energy for photosynthesis."
+          }
+        ],
+        "question": "Create source-linked study items.",
+        "count": 2,
+        "previousQuestions": [
+          "What is the role of sunlight in photosynthesis?",
+          "Where does carbon dioxide enter during photosynthesis?"
+        ]
+      },
+      "response": {
+        "error": "The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry.",
+        "category": "structure"
+      }
+    }
+  ],
+  "localInference": "unverified",
+  "semanticReview": "pending agent inspection",
+  "restored": false,
+  "narrowOverflow": false
+}

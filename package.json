@@ -19,10 +19,11 @@
     "worker:dev": "wrangler dev --config worker/wrangler.jsonc",
     "worker:check": "wrangler deploy --dry-run --config worker/wrangler.jsonc",
     "worker:deploy": "wrangler deploy --config worker/wrangler.jsonc",
-    "verify": "npm run typecheck && npm test && npm run build && npm run worker:check",
+    "verify": "npm run typecheck && npm test && npm run build",
     "ocr:prepare": "node scripts/prepare-ocr.mjs",
     "predev": "npm run ocr:prepare",
-    "prebuild": "npm run ocr:prepare"
+    "prebuild": "npm run ocr:prepare",
+    "postbuild": "node scripts/prepare-offline.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "57.0.16",

@@ -1,0 +1,10 @@
+{
+  "observedAt": "2026-10-09T23:24:20.067Z",
+  "fixture": "Fresh browser-rendered synthetic printed pages; not camera photographs",
+  "tesseract": "7.0.0",
+  "elapsedFlowMs": 3067,
+  "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+  "externalRequests": [],
+  "rawEnglish": "Electric current flows through a closed circuit.\nOpening a switch breaks the circuit and stops current.\n",
+  "rawFilipino": "Dumadaloy ang kuryente sa saradong sirkito.\nKapag binuksan ang switch, humihinto ang daloy ng kuryente.\n"
+}
