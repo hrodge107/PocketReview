@@ -50,18 +50,23 @@
       "area": "source",
       "title": "Capture and confirm printed source",
       "user_visible_behavior": "Capture or select up to two photos for one lesson, OCR them locally and sequentially, and confirm editable extracted text beside each image.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "Process fresh English/Filipino printed-page photos locally in the desktop web demo; verify native OCR separately during later phone acceptance.",
         "Retain photos, raw OCR, corrected text, and page references separately; require explicit confirmation.",
         "Exercise poor/empty OCR recovery and visible rejection or narrowing of oversized input.",
         "Edit confirmed source and verify older generated items, answers, and quiz progress are invalidated."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: npm run verify passed typecheck, 16 focused tests, Expo export and Worker dry-run; final build/typecheck passed after native-unavailable disclosure.",
+        "2026-10-10: 13 production Chrome checks passed, including actual local English/Filipino OCR on fresh synthetic printed-page images, correction/confirmation/reload, failed reads/writes, cancellation/empty OCR and image/page limits. Actual OCR output and environment: verification/source-ocr-evidence.json.",
+        "2026-10-10: desktop/320px source screenshots inspected, overlap corrected, bounding-box and simulated 200% zoom checks passed; detailed scoped OpenSpec/antislop evidence: verification/confirm-source.md. Native OCR/camera, camera-photo accuracy and cold offline shell remain unverified.",
+        "2026-10-10: all six tasks complete; main confirm-source spec synced and strictly validated; archived as 2026-10-10-confirm-source."
+      ],
       "depends": [
         "phone-setup"
       ],
-      "notes": "Domain pattern: Confirm extracted source before deriving study material. | Separate OpenSpec change will be proposed after dependencies pass. Local OCR remains required; browser and native implementations need separate adapters and evidence."
+      "notes": "Desktop local source acceptance passed. Archived change: 2026-10-10-confirm-source. Local OCR remains required; native OCR implementation and physical-device evidence are later work. Source edits use the shared invalidation boundary. Camera-photo accuracy is not established by synthetic printed-page tests."
     },
     {
       "id": "generate-reviewer",

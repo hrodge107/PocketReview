@@ -1,23 +1,27 @@
-import { useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native';
+import { useEffect, useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native';
+import { Button, paper, ink } from './controls';
+import { SourceScreen } from './SourceScreen';
 import { checks } from './checks';
 import { liveReviewed, type Review } from './evidence';
 import { exportEvidence } from './export-evidence';
 import { cloudService, mockService } from './model-service';
 import { useSetup } from './use-setup';
 import type { ExecutionMode } from '../shared/model';
-const paper = '#faf6ed', ink = '#172b4d', amber = '#ad5a00';
-
-function Button({ label, accessibilityLabel = label, onPress, disabled = false, primary = false }: { label: string; accessibilityLabel?: string; onPress: () => void; disabled?: boolean; primary?: boolean }) {
-  const [focused, setFocused] = useState(false);
-  return <Pressable accessibilityRole="button" accessibilityLabel={accessibilityLabel} accessibilityState={{ disabled }} disabled={disabled}
-    onPress={onPress} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-    style={({ pressed }) => [styles.button, primary && styles.primary, disabled && styles.disabled, focused && styles.focused, pressed && { opacity: 0.8 }]}>
-    <Text style={[styles.buttonText, primary && { color: paper }]}>{label}</Text>
-  </Pressable>;
+export default function App() {
+  const [stage, setStage] = useState<'setup' | 'source'>('setup');
+  const [setupBusy, setSetupBusy] = useState(false), [sourceBusy, setSourceBusy] = useState(false);
+  return <View style={{ flex: 1, backgroundColor: paper }}>
+    <View style={{ padding: 16, flexDirection: 'row', gap: 12, flexWrap: 'wrap', borderBottomWidth: 1, borderColor: ink }}>
+      <Button label={stage === 'setup' ? 'Setup selected' : 'Show setup'} disabled={setupBusy || sourceBusy} onPress={() => setStage('setup')} />
+      <Button label={stage === 'source' ? 'Source selected' : 'Show source'} disabled={setupBusy || sourceBusy} onPress={() => setStage('source')} />
+    </View>
+    <View style={{ flex: 1, display: stage === 'setup' ? 'flex' : 'none' }}><SetupScreen onBusyChange={setSetupBusy} /></View>
+    <View style={{ flex: 1, display: stage === 'source' ? 'flex' : 'none' }}><SourceScreen onBusyChange={setSourceBusy} /></View>
+  </View>;
 }
 
-export default function App() {
+function SetupScreen({ onBusyChange }: { onBusyChange: (busy: boolean) => void }) {
   const { width } = useWindowDimensions();
   const [mode, setMode] = useState<ExecutionMode>('mock');
   const [endpoint, setEndpoint] = useState(process.env.EXPO_PUBLIC_WORKER_URL || '');
@@ -25,6 +29,7 @@ export default function App() {
   const [exportError, setExportError] = useState('');
   const state = useSetup();
   const busy = !!state.busy;
+  useEffect(() => { onBusyChange(busy); }, [busy, onBusyChange]);
   async function exportResults() {
     try { await exportEvidence(state.evidence); setExportError(''); } catch { setExportError('Export failed. Retry while the results are still on this screen.'); }
   }
@@ -113,10 +118,6 @@ const styles = StyleSheet.create({
   label: { color: ink, fontSize: 16, lineHeight: 24, fontWeight: '600', marginBottom: 8 },
   source: { color: ink, fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined, fontSize: 18, lineHeight: 29, marginBottom: 16 },
   actions: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 18 },
-  button: { minHeight: 48, maxWidth: '100%', justifyContent: 'center', borderWidth: 1, borderColor: ink, paddingHorizontal: 14, paddingVertical: 12, borderRadius: 4 },
-  buttonText: { color: ink, fontSize: 15, lineHeight: 22, fontWeight: '600', flexShrink: 1 },
-  primary: { backgroundColor: amber, borderColor: amber }, disabled: { opacity: 0.65 },
-  focused: { borderWidth: 3, borderColor: ink },
   form: { gap: 4, marginBottom: 18 },
   input: { borderWidth: 1, borderColor: ink, borderRadius: 4, padding: 12, minHeight: 48, fontSize: 16, color: ink, backgroundColor: paper, marginBottom: 12 },
   section: { borderTopWidth: 1, borderColor: ink, paddingTop: 24, marginTop: 22 },

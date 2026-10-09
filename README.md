@@ -2,7 +2,7 @@
 
 Built with Llama (Cloudflare Llama 3.2 3B candidate).
 
-PocketReview is migrating to React Native with Expo. This checkout implements the setup feature: labeled sample responses, an optional Cloudflare Worker service, bounded source-evidence checks and saved/exportable results. Photo OCR, cards, quiz and lesson chat are tracked later features.
+PocketReview uses React Native with Expo. This checkout implements model-service setup and desktop local photo OCR with editable, saved source text. Cards, quiz and lesson chat are tracked later features.
 
 Live inference through the local Worker is now verified for four setup samples using Llama 3.2 3B, and the user accepted their meaning and language. External Worker deployment, Android operation and local inference remain unverified. A mock result never counts as live AI evidence.
 
@@ -25,7 +25,15 @@ npm run test:browser
 
 The production web export is `dist/`; preview binds only to http://localhost:4173. Close a preview server before running browser tests because those tests start their own server on that port. The current setup export has no offline app-shell cache; cold offline study belongs to the later offline-resume feature.
 
-`npm run verify` runs type checking, focused contract/proxy/storage tests, the production Expo web export and a Worker deployment dry-run. The dry-run bundles code and validates bindings without deploying or running a model. Browser tests use installed Chrome and simulated setup responses. Native testing remains separate.
+`npm run verify` runs type checking, focused contract/proxy/storage tests, the production Expo web export and a Worker deployment dry-run. The dry-run bundles code and validates bindings without deploying or running a model. Browser tests use installed Chrome, simulated setup responses and actual local OCR on fresh synthetic printed-page images. Native testing remains separate.
+
+## Capture and correct a source
+
+Choose **Show source**, then select up to two PNG, JPEG or WebP photos. Each image must fit within 2 MiB of encoded image data and 12 million pixels; use a smaller crop if rejected. Local OCR runs one page at a time. Compare the photo with corrected text, inspect original OCR and confirm the source. Every page needs text, with at most 4,500 combined characters (about 1,500 tokens using characters/3, a heuristic). Source edits reset confirmation and invalidate derived study material. Save failures preserve the draft and offer retry.
+
+`npm run ocr:prepare` copies pinned Tesseract worker/API/core assets and checks English/Filipino language hashes from a pinned tessdata_fast revision. Development and production build run it automatically. First preparation requires internet to download about 5.7 MB of language data; subsequent preparation uses verified local files. OCR photos/text are processed in the browser and are not sent to Cloudflare. Worker/core assets add to the static export size. Lesson photos/text use IndexedDB on web, separate from setup evidence and OCR language caches.
+
+The native picker and storage adapter exist, but native OCR is explicitly unavailable pending its later implementation/device check. Camera selection, real camera-photo accuracy, native persistence and cold offline app reopening have not been demonstrated by desktop fixture tests.
 
 ## Connect Cloudflare
 

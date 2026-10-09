@@ -19,16 +19,21 @@
     "worker:dev": "wrangler dev --config worker/wrangler.jsonc",
     "worker:check": "wrangler deploy --dry-run --config worker/wrangler.jsonc",
     "worker:deploy": "wrangler deploy --config worker/wrangler.jsonc",
-    "verify": "npm run typecheck && npm test && npm run build && npm run worker:check"
+    "verify": "npm run typecheck && npm test && npm run build && npm run worker:check",
+    "ocr:prepare": "node scripts/prepare-ocr.mjs",
+    "predev": "npm run ocr:prepare",
+    "prebuild": "npm run ocr:prepare"
   },
   "dependencies": {
     "@expo/metro-runtime": "57.0.16",
     "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "57.0.27",
+    "expo-image-picker": "57.0.20",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
-    "react-native-web": "0.21.4"
+    "react-native-web": "0.21.4",
+    "tesseract.js": "7.0.0"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

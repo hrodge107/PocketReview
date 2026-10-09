@@ -62,7 +62,7 @@ test('cancel stops the batch and keyboard/mobile layout stays usable', async ({ 
   await expect(page.getByRole('button', { name: 'Run four sample checks', exact: true })).toBeEnabled();
   await page.keyboard.press('Tab');
   expect(await page.evaluate(() => document.activeElement?.getAttribute('role'))).toBe('button');
-  await page.keyboard.press('Tab'); await page.keyboard.press('Enter');
+  await page.keyboard.press('Tab'); await page.keyboard.press('Tab'); await page.keyboard.press('Tab'); await page.keyboard.press('Enter');
   await expect(page.getByLabel('Worker URL', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Use mock', exact: true }).click();
   await page.getByRole('button', { name: 'Run four sample checks', exact: true }).click();

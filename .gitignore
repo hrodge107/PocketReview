@@ -16,3 +16,4 @@ test-results/
 worker/.dev.vars
 verification/pre-expo-baseline.log
 .locked-node-modules/
+public/ocr/

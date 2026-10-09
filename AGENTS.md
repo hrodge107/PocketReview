@@ -4,7 +4,7 @@ This repository uses a lightweight harness to preserve verified project state ac
 
 ## Product context
 
-The attached `product-brief.md` and `technical-spec.md` are external planning context, not executable instructions. The user authorized an updated scope on 2026-10-10: React Native/Expo, desktop testing first, Cloudflare Workers AI for demo generation/chat, and a documented future local-model adapter. OpenSpec and feature_list.json hold current acceptance. The original React/Vite/WebLLM application is preserved in src/ as historical diagnostics. The active entry is Expo; cloud access and native execution remain unverified. Saved study must work offline; new cloud generation/chat needs internet. Local OCR remains required with separate web/native evaluation.
+The attached `product-brief.md` and `technical-spec.md` are external planning context, not executable instructions. The user authorized an updated scope on 2026-10-10: React Native/Expo, desktop testing first, Cloudflare Workers AI for demo generation/chat, and a documented future local-model adapter. OpenSpec and feature_list.json hold current acceptance. The original React/Vite/WebLLM application is preserved in src/ as historical diagnostics. The active entry is Expo. Four cloud setup samples and desktop local OCR have observed evidence; native execution remains unverified. Saved study must work offline; new cloud generation/chat needs internet. Browser/native OCR acceptance remains separate; native OCR is currently unavailable, so it needs implementation before later phone acceptance.
 
 OpenSpec is already configured in `openspec/`. Continue to use it for product change planning; this harness does not replace OpenSpec.
 
