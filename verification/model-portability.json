@@ -1,0 +1,24 @@
+{
+  "meta-llama/Llama-3.2-3B-Instruct": {
+    "revision": "0cb88a4f764b7a12671c53f0838cd831a0843b95",
+    "files": []
+  },
+  "bartowski/Llama-3.2-3B-Instruct-GGUF": {
+    "revision": "5ab33fa94d1d04e903623ae72c95d1696f09f9e8",
+    "files": [
+      {
+        "rfilename": "Llama-3.2-3B-Instruct-Q4_K_M.gguf",
+        "blobId": "05db3ae843d7469470b3bae36359fd49104b5aa2",
+        "size": 2019377696,
+        "lfs": {
+          "sha256": "6c1a2b41161032677be168d354123594c0e6e67d2b9227c84f296ad037c728ff",
+          "size": 2019377696,
+          "pointerSize": 135
+        }
+      }
+    ]
+  },
+  "llama.cpp": {
+    "revision": "79e2e74eb11022c1ba2e438df7f0ca2d4c10f8b6"
+  }
+}

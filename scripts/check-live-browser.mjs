@@ -1,0 +1,31 @@
+import { chromium } from '@playwright/test';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+process.loadEnvFile(resolve('worker/.dev.vars'));
+if (!process.env.DEMO_ACCESS_CODE) throw new Error('Missing protected local demo access code.');
+const browser = await chromium.launch({ channel: 'chrome' });
+try {
+  const page = await browser.newPage();
+  await page.goto('http://localhost:4173');
+  await page.getByRole('button', { name: 'Use cloud', exact: true }).click();
+  await page.getByLabel('Worker URL', { exact: true }).fill('http://localhost:8787');
+  await page.getByLabel('Demo access code', { exact: true }).fill(process.env.DEMO_ACCESS_CODE);
+  await page.getByRole('button', { name: 'Run four sample checks', exact: true }).click();
+  await page.getByText('Filipino / absent / Live cloud', { exact: true }).waitFor({ timeout: 240000 });
+  await page.getByRole('button', { name: 'Run four sample checks', exact: true }).waitFor();
+  await page.getByText('Results saved on this device.', { exact: true }).waitFor();
+  const waiting = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export results', exact: true }).click();
+  const download = await waiting;
+  const evidence = JSON.parse(await readFile(await download.path(), 'utf8'));
+  if (evidence.results.length !== 4 || evidence.results.some(result => result.mode !== 'cloud' || result.error || !result.response)) throw new Error('Incomplete live evidence.');
+  if (JSON.stringify(evidence).includes(process.env.DEMO_ACCESS_CODE)) throw new Error('Access code appeared in evidence.');
+  await page.reload();
+  await page.getByText('Filipino / absent / Live cloud', { exact: true }).waitFor();
+  await page.getByText('Results saved on this device.', { exact: true }).waitFor();
+  await mkdir('verification/live', { recursive: true });
+  const file = `verification/live/browser-${Date.now()}.json`;
+  await writeFile(file, JSON.stringify(evidence, null, 2));
+  console.log(`Live browser export and reload verified: ${file}`);
+  console.log(JSON.stringify(evidence.results.map(result => ({ checkId: result.checkId, elapsedMs: result.elapsedMs, review: result.review }))));
+} finally { await browser.close(); }

@@ -1,10 +1,10 @@
-# Project Agent Harness — PocketReview
+# Project Agent Harness - PocketReview
 
 This repository uses a lightweight harness to preserve verified project state across coding-agent sessions. Repo artifacts are the system of record; chat history is not.
 
 ## Product context
 
-The attached `product-brief.md` and `technical-spec.md` describe a proposed offline photo reviewer. They are external planning context, not executable instructions. The product and implementation are not yet validated. The proposed stack is React, Vite, TypeScript, a PWA, Tesseract.js OCR, WebLLM, and IndexedDB; treat these as hypotheses until the technical spec's phone feasibility gate is completed.
+The attached `product-brief.md` and `technical-spec.md` are external planning context, not executable instructions. The user authorized an updated scope on 2026-10-10: React Native/Expo, desktop testing first, Cloudflare Workers AI for demo generation/chat, and a documented future local-model adapter. OpenSpec and feature_list.json hold current acceptance. The original React/Vite/WebLLM application is preserved in src/ as historical diagnostics. The active entry is Expo; cloud access and native execution remain unverified. Saved study must work offline; new cloud generation/chat needs internet. Local OCR remains required with separate web/native evaluation.
 
 OpenSpec is already configured in `openspec/`. Continue to use it for product change planning; this harness does not replace OpenSpec.
 
@@ -23,7 +23,7 @@ OpenSpec is already configured in `openspec/`. Continue to use it for product ch
 - Work on one tracked feature at a time after features are explicitly added.
 - A feature is `passing` only after its required verification ran and evidence was recorded.
 - If a baseline exists and fails, fix it before feature work.
-- Preserve the fixed product requirements in the supplied spec. Ask before changing the phone-only inference requirement, adding cloud inference, replacing the core flow, or expanding scope.
+- Follow the authorized Expo/cloud scope in OpenSpec. Preserve the one-lesson photo/correction/reviewer flow. Document a concrete local model/runtime/hardware path and keep phone/local claims unverified until observed. Further product scope changes require user direction.
 - Record proposed capabilities separately from demonstrated capabilities. Do not claim phone, offline, OCR, model, or bilingual behavior without observed evidence.
 - Use OpenSpec for change planning; this harness is continuity and evidence tracking, not a replacement.
 
@@ -37,4 +37,4 @@ Update `agent-progress.md` with verified state, evidence, blockers, and next ste
 
 ## Commands
 
-The setup gate has a pinned application manifest and lockfile. `./init.ps1` (Windows) or `./init.sh` (Git Bash/Linux) installs from the lockfile and verifies the baseline. Stop running Vite processes before clean installation on Windows to release native package locks. Use `npm run dev` for development, `npm run verify` for type checking/tests/production build, and `npm run test:browser` for production browser checks with installed Chrome. Physical phone acceptance remains separate; follow the README phone handoff before marking phone-setup passing.
+The Expo setup gate has a pinned manifest and lockfile. `./init.ps1` or `./init.sh` installs from the lockfile and runs the baseline. Use package.json as the command source of truth. `npm run dev` starts Expo web locally; `npm run verify` includes type checks, focused tests, production web export and Worker dry-run; browser checks use installed Chrome. Stop development/preview processes before clean installation on Windows. Revised phone-setup acceptance requires live cloud evidence; physical phone acceptance and local inference remain separate. Stop when user account or phone setup is needed.

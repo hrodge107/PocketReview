@@ -1,0 +1,151 @@
+{
+  "environment": "Node v24.11.1, local Worker with remote Workers AI",
+  "results": [
+    {
+      "checkId": "en-supported",
+      "at": "2026-10-09T19:34:30.445Z",
+      "elapsedMs": 1073,
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-en-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "A closed circuit lets electric current flow. Opening a switch breaks the circuit and stops the current."
+          }
+        ],
+        "question": "What happens when the switch is opened?"
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "setup-en-1",
+        "output": {
+          "answer": "stops the current",
+          "supported": true,
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Opening a switch breaks the circuit and stops the current."
+            }
+          ]
+        }
+      },
+      "error": null,
+      "rejectionCategory": null,
+      "review": "pending"
+    },
+    {
+      "checkId": "en-absent",
+      "at": "2026-10-09T19:34:31.000Z",
+      "elapsedMs": 551,
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-en-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "A closed circuit lets electric current flow. Opening a switch breaks the circuit and stops the current."
+          }
+        ],
+        "question": "What is the battery voltage?"
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "setup-en-1",
+        "output": {
+          "answer": "This is not in this lesson.",
+          "supported": false,
+          "evidence": []
+        }
+      },
+      "error": null,
+      "rejectionCategory": null,
+      "review": "pending"
+    },
+    {
+      "checkId": "fil-supported",
+      "at": "2026-10-09T19:34:31.714Z",
+      "elapsedMs": 714,
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-fil-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Dumadaloy ang kuryente sa saradong sirkito. Kapag binuksan ang switch, napuputol ang sirkito at humihinto ang daloy ng kuryente."
+          }
+        ],
+        "question": "Ano ang nangyayari kapag binuksan ang switch?"
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "setup-fil-1",
+        "output": {
+          "answer": "Napuputol ang sirkito at humihinto ang daloy ng kuryente.",
+          "supported": true,
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Dumadaloy ang kuryente sa saradong sirkito. Kapag binuksan ang switch, napuputol ang sirkito at humihinto ang daloy ng kuryente."
+            }
+          ]
+        }
+      },
+      "error": null,
+      "rejectionCategory": null,
+      "review": "pending"
+    },
+    {
+      "checkId": "fil-absent",
+      "at": "2026-10-09T19:34:32.198Z",
+      "elapsedMs": 483,
+      "status": 200,
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-fil-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Dumadaloy ang kuryente sa saradong sirkito. Kapag binuksan ang switch, napuputol ang sirkito at humihinto ang daloy ng kuryente."
+          }
+        ],
+        "question": "Ilang boltahe ang baterya?"
+      },
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "sourceRevision": "setup-fil-1",
+        "output": {
+          "answer": "Wala ito sa araling ito.",
+          "supported": false,
+          "evidence": []
+        }
+      },
+      "error": null,
+      "rejectionCategory": null,
+      "review": "pending"
+    }
+  ]
+}

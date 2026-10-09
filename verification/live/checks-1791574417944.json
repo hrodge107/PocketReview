@@ -1,0 +1,27 @@
+{
+  "environment": "Node v24.11.1, local Worker with remote Workers AI",
+  "results": [
+    {
+      "checkId": "en-absent",
+      "at": "2026-10-09T19:33:37.936Z",
+      "elapsedMs": 1980,
+      "status": 502,
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-en-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "A closed circuit lets electric current flow. Opening a switch breaks the circuit and stops the current."
+          }
+        ],
+        "question": "What is the battery voltage?"
+      },
+      "response": null,
+      "error": "The model returned an answer PocketReview could not verify. No answer was accepted. Check the Worker terminal before one retry.",
+      "rejectionCategory": "json",
+      "review": "pending"
+    }
+  ]
+}

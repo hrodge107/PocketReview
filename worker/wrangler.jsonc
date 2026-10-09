@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "pocketreview-ai",
+  "main": "index.ts",
+  "compatibility_date": "2026-10-09",
+  "ai": { "binding": "AI" },
+  "ratelimits": [{ "name": "REQUEST_LIMITER", "namespace_id": "1001", "simple": { "limit": 12, "period": 60 } }],
+  "vars": {
+    "MODEL": "@cf/meta/llama-3.2-3b-instruct",
+    "MODEL_REVISION": "provider-managed-unpinned",
+    "ALLOWED_ORIGINS": "http://localhost:8081,http://localhost:4173"
+  },
+  "observability": { "enabled": false }
+}

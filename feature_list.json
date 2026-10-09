@@ -19,21 +19,30 @@
       "id": "phone-setup",
       "priority": 1,
       "area": "setup",
-      "title": "Prepare and test the phone",
-      "user_visible_behavior": "Download required assets, show truthful progress and retry states, and run local generation on the phone.",
-      "status": "in_progress",
+      "title": "Prepare Expo and the model service",
+      "user_visible_behavior": "Start the Expo app on desktop, use an explicitly labeled mock or live Cloudflare model service, and retain setup evidence with a documented future local deployment path.",
+      "status": "passing",
       "verification": [
-        "On Honor X9c over HTTPS, load the model and inspect supported and absent-answer checks in English and Filipino.",
-        "Disconnect internet, close and reopen the app, and generate with a newly initialized engine using cached assets.",
-        "Export actual device/browser, model/version, output, duration, and failure evidence; desktop checks do not satisfy phone acceptance."
+        "Verify clean Expo desktop/web setup, configured install/verify/start commands and production build.",
+        "Run live supported and absent-answer checks in English and Filipino; review meaning and retain provider/model/version, actual output, latency and failure evidence. Mock outputs do not pass this gate.",
+        "Verify bounded output, actionable configuration/quota/timeout errors, secret-free client bundles and preserved evidence during storage failure.",
+        "Document model weights/license, compatible local runtime and hardware requirements. Phone/local operation remains unverified until actual device evidence exists."
       ],
       "evidence": [
         "2026-10-10: npm ci and npm run verify passed; 5 unit tests and production build.",
         "2026-10-10: npm run test:browser passed 4 desktop Chrome checks, including simulated worker controls, persistence/export, storage failures, responsive layout and offline app shell. No actual phone inference evidence.",
-        "Detailed observed results and pending phone acceptance: verification/phone-setup.md; phone procedure: README.md."
+        "Detailed observed results and pending phone acceptance: verification/phone-setup.md; phone procedure: README.md.",
+        "2026-10-10 scope revision: Honor X9c WebLLM generation failed with GPUBuffer mapAsync AbortError; preserved in agent-progress.md. Neither cloud access nor Expo migration has been verified.",
+        "2026-10-10: clean ./init.ps1 passed npm ci, typecheck, 12 focused tests, Expo production web export and Worker dry-run; no cloud deployment/inference.",
+        "2026-10-10: 5 desktop Chrome controls/persistence/failure/recovery checks passed; 320px screenshots inspected. Details: verification/expo-setup.md. No phone or offline AI evidence.",
+        "2026-10-10: actual Cloudflare Llama 3.2 3B accepted four structured supported/absent checks in English/Filipino after prompt clarification; verification/live/checks-1791574472201.json. Human meaning review pending.",
+        "2026-10-10: actual production browser cloud checks, export without access code and cold page reload/persistence passed; verification/live/browser-1791574644380.json. This is online cloud evidence, not offline/phone inference.",
+        "2026-10-10: pinned local model/runtime metadata and quantified artifact recorded in verification/model-portability.json; local-serving proposal in docs/local-portability.md. Local execution unverified.",
+        "2026-10-10: user confirmed all four live answers are fine; reviewed copy and exact verdict recorded in verification/live/reviewed-browser-1791574644380.json. Original pending-review export preserved. Task 1.4 complete.",
+        "2026-10-10: user approved setup/offline ownership reconciliation; all six production browser checks passed, including offline cloud errors preserving prior results. All five tasks complete; main phone-setup spec synced and strictly validated; change archived at openspec/changes/archive/2026-10-10-offline-photo-reviewer-mvp."
       ],
       "depends": [],
-      "notes": "Domain pattern: Verify local device capability before promising offline AI. Time-box feasibility to approximately 45 minutes; resolve failure before dependent implementation. | Approved OpenSpec change: offline-photo-reviewer-mvp, task group 1."
+      "notes": "Revised desktop setup acceptance passed; all five tasks complete with human review and approved scope reconciliation. Audit: verification/openspec-setup-audit.md. Main spec: openspec/specs/phone-setup/spec.md. Archived change: 2026-10-10-offline-photo-reviewer-mvp. Native/phone, external deployment and actual local inference remain unverified. Full saved-study offline behavior remains required by offline-resume."
     },
     {
       "id": "confirm-source",
@@ -43,7 +52,7 @@
       "user_visible_behavior": "Capture or select up to two photos for one lesson, OCR them locally and sequentially, and confirm editable extracted text beside each image.",
       "status": "not_started",
       "verification": [
-        "Process fresh printed-page photos containing English and Filipino text on the phone.",
+        "Process fresh English/Filipino printed-page photos locally in the desktop web demo; verify native OCR separately during later phone acceptance.",
         "Retain photos, raw OCR, corrected text, and page references separately; require explicit confirmation.",
         "Exercise poor/empty OCR recovery and visible rejection or narrowing of oversized input.",
         "Edit confirmed source and verify older generated items, answers, and quiz progress are invalidated."
@@ -52,7 +61,7 @@
       "depends": [
         "phone-setup"
       ],
-      "notes": "Domain pattern: Confirm extracted source before deriving study material. | Separate OpenSpec change will be proposed after dependencies pass."
+      "notes": "Domain pattern: Confirm extracted source before deriving study material. | Separate OpenSpec change will be proposed after dependencies pass. Local OCR remains required; browser and native implementations need separate adapters and evidence."
     },
     {
       "id": "generate-reviewer",
@@ -64,7 +73,8 @@
       "verification": [
         "Generate items from confirmed corrected text and inspect answer meaning against visible source evidence in both response languages.",
         "Validate output structure, page IDs, text bounds, and exact quotations; reject malformed or unsupported output.",
-        "Allow at most one bounded retry and verify failed generation preserves previously completed saved work."
+        "Allow at most one bounded retry and verify failed generation preserves previously completed saved work.",
+        "Use the live configured cloud adapter for acceptance; disclose remote text transfer and show connection/quota errors without losing confirmed source."
       ],
       "evidence": [],
       "depends": [
@@ -99,10 +109,11 @@
       "user_visible_behavior": "Ask short lesson-grounded questions in English or Filipino, view validated supporting evidence, and receive a clear response when an answer is absent.",
       "status": "not_started",
       "verification": [
-        "Ask supported and absent-answer questions in both English and Filipino on the phone and inspect meaning.",
+        "Ask supported and absent-answer questions in English and Filipino through the live cloud service on desktop and inspect meaning; phone verification occurs later.",
         "Verify returned page references and quotations against the current confirmed source.",
         "Reject invalid evidence and exercise understandable busy, failure, and retry states.",
-        "Verify source content is treated as untrusted lesson data and completed work remains available during failures."
+        "Verify source content is treated as untrusted lesson data and completed work remains available during failures.",
+        "When offline, show that new answers require internet and keep saved study material available."
       ],
       "evidence": [],
       "depends": [
@@ -114,22 +125,21 @@
       "id": "offline-resume",
       "priority": 6,
       "area": "offline",
-      "title": "Reopen and create offline",
-      "user_visible_behavior": "Restore one saved lesson and quiz progress and create new review content after cold offline reopening without internet or a running development laptop.",
+      "title": "Reopen saved study offline",
+      "user_visible_behavior": "Restore one saved lesson, cards and quiz progress after cold offline reopening; study and score saved questions without internet. Cloud generation and new chat answers require a connection.",
       "status": "not_started",
       "verification": [
-        "Disconnect internet, switch off the laptop, close the app, and reopen it.",
-        "Verify photos, corrected source, generated items, and quiz progress are restored.",
-        "Process fresh photos and run OCR, reviewer generation, quiz feedback, and chat using cached assets.",
-        "Inspect network behavior and verify missing or evicted assets produce truthful readiness and recovery states.",
-        "Simulate failed storage writes and confirm no false saved label; verify cache cleanup preserves model assets."
+        "Close the production app and reopen with internet disconnected; verify the web shell is available rather than relying on an already-loaded tab.",
+        "Verify saved photos, raw/corrected source, generated items and quiz progress restore; flip cards and deterministically score saved quiz choices offline.",
+        "Verify cloud generation/new chat visibly require internet without erasing saved work. Offline fresh-photo OCR and local generation are outside current acceptance.",
+        "Simulate failed storage writes and confirm no false saved label; verify recovery and source-revision invalidation."
       ],
       "evidence": [],
       "depends": [
         "study-practice",
         "lesson-chat"
       ],
-      "notes": "Domain pattern: Durable offline sessions preserve study continuity; an already-loaded tab does not demonstrate cold offline readiness. | Separate OpenSpec change will be proposed after dependencies pass."
+      "notes": "Scope revised on 2026-10-10: saved study offline; new AI content uses cloud. Native reopening remains a later device check. Separate OpenSpec change after dependencies pass."
     },
     {
       "id": "demo-evidence",
@@ -139,16 +149,18 @@
       "user_visible_behavior": "Provide reproducible setup instructions, tested limitations, technology disclosures, and a short demonstration of the complete verified flow.",
       "status": "not_started",
       "verification": [
-        "Follow documented setup from a clean checkout and run the configured verification commands.",
-        "Record tested phone/browser, package/model revisions, initial download requirements, observed latency, and unresolved limitations.",
-        "Prepare a roughly one-minute demonstration covering fresh capture, correction, generated reviewer, quiz/chat, and offline reopening.",
-        "Verify OpenSpec coverage and UI delivery checks against actual evidence before claiming the MVP complete."
+        "Follow documented clean checkout setup and configured verification commands.",
+        "Record real provider/model identity, quota observations, desktop environment, latency, internet requirements and limitations; retain historical phone failure evidence separately.",
+        "Prepare a roughly one-minute live demo of photo selection/capture, local OCR, correction, generated reviewer, quiz/chat and saved-content offline reopening. Mock responses cannot count as live AI evidence.",
+        "Perform later physical-phone UI, photo/OCR and persistence acceptance; stop for user setup when needed. Phone inference is deferred and unverified.",
+        "Document model weights/license, quantized artifact where applicable, local serving/runtime procedure and realistic hardware requirements. Distinguish local self-hosting from inference directly on the Honor X9c.",
+        "Verify OpenSpec coverage and applicable antislop delivery checks before claiming completion."
       ],
       "evidence": [],
       "depends": [
         "offline-resume"
       ],
-      "notes": "Domain pattern: Reproducible demonstrations and disclosures support honest evaluation. | Separate OpenSpec change will be proposed after dependencies pass."
+      "notes": "Cloud demo is authorized; local deployment potential must have a concrete documented path. No local phone compatibility claim without observed execution. Separate OpenSpec change after dependencies pass."
     }
   ]
 }

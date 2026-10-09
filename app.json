@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "PocketReview",
+    "slug": "pocketreview",
+    "version": "0.2.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#faf6ed",
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "android": {
+      "package": "com.pocketreview.app"
+    }
+  }
+}

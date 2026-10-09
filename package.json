@@ -1,34 +1,40 @@
 {
   "name": "pocket-review",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
+  "main": "index.ts",
   "engines": {
     "node": ">=24.11.0"
   },
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "expo start --web --host localhost --port 8081",
+    "start": "expo start",
+    "android": "expo start --android",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --config vitest.expo.config.ts",
     "test:browser": "playwright test",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0",
-    "verify": "npm run typecheck && npm test && npm run build"
+    "build": "expo export --platform web",
+    "preview": "node scripts/serve-web.mjs",
+    "worker:dev": "wrangler dev --config worker/wrangler.jsonc",
+    "worker:check": "wrangler deploy --dry-run --config worker/wrangler.jsonc",
+    "worker:deploy": "wrangler deploy --config worker/wrangler.jsonc",
+    "verify": "npm run typecheck && npm test && npm run build && npm run worker:check"
   },
   "dependencies": {
-    "@mlc-ai/web-llm": "0.2.85",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "@expo/metro-runtime": "57.0.16",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "57.0.27",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-web": "0.21.4"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",
-    "@types/react": "19.3.0",
-    "@types/react-dom": "19.3.0",
-    "@vitejs/plugin-react": "6.1.2",
-    "fake-indexeddb": "6.2.5",
-    "typescript": "7.0.2",
-    "vite": "8.3.4",
-    "vite-plugin-pwa": "2.0.0",
-    "vitest": "5.0.3"
+    "@types/react": "19.2.4",
+    "typescript": "6.0.3",
+    "vitest": "5.0.3",
+    "wrangler": "4.149.0"
   }
 }

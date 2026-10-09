@@ -1,0 +1,188 @@
+{
+  "version": 2,
+  "results": [
+    {
+      "id": "1791574640365-en-supported",
+      "checkId": "en-supported",
+      "at": "2026-10-09T19:37:20.365Z",
+      "elapsedMs": 1723,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "mode": "cloud",
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "sourceRevision": "setup-en-1",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "output": {
+          "answer": "stops the current",
+          "supported": true,
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Opening a switch breaks the circuit and stops the current."
+            }
+          ]
+        }
+      },
+      "error": null,
+      "review": "faithful"
+    },
+    {
+      "id": "1791574642089-en-absent",
+      "checkId": "en-absent",
+      "at": "2026-10-09T19:37:22.089Z",
+      "elapsedMs": 370,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "mode": "cloud",
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "sourceRevision": "setup-en-1",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "output": {
+          "answer": "This is not in this lesson.",
+          "supported": false,
+          "evidence": []
+        }
+      },
+      "error": null,
+      "review": "faithful"
+    },
+    {
+      "id": "1791574642459-fil-supported",
+      "checkId": "fil-supported",
+      "at": "2026-10-09T19:37:22.459Z",
+      "elapsedMs": 687,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "mode": "cloud",
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "sourceRevision": "setup-fil-1",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "output": {
+          "answer": "Napuputol ang sirkito at humihinto ang daloy ng kuryente.",
+          "supported": true,
+          "evidence": [
+            {
+              "pageId": "page-1",
+              "quote": "Kapag binuksan ang switch, napuputol ang sirkito at humihinto ang daloy ng kuryente."
+            }
+          ]
+        }
+      },
+      "error": null,
+      "review": "faithful"
+    },
+    {
+      "id": "1791574643146-fil-absent",
+      "checkId": "fil-absent",
+      "at": "2026-10-09T19:37:23.146Z",
+      "elapsedMs": 523,
+      "environment": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "mode": "cloud",
+      "response": {
+        "version": 1,
+        "mode": "cloud",
+        "sourceRevision": "setup-fil-1",
+        "provider": "Cloudflare Workers AI",
+        "model": "@cf/meta/llama-3.2-3b-instruct",
+        "revision": "provider-managed-unpinned",
+        "output": {
+          "answer": "Wala ito sa araling ito.",
+          "supported": false,
+          "evidence": []
+        }
+      },
+      "error": null,
+      "review": "faithful"
+    }
+  ],
+  "appVersion": "0.2.0",
+  "localInference": "unverified",
+  "samples": [
+    {
+      "id": "en-supported",
+      "label": "English / supported",
+      "expected": "The circuit breaks and current stops.",
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-en-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "A closed circuit lets electric current flow. Opening a switch breaks the circuit and stops the current."
+          }
+        ],
+        "question": "What happens when the switch is opened?"
+      }
+    },
+    {
+      "id": "en-absent",
+      "label": "English / absent",
+      "expected": "State that the voltage is not in this lesson.",
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-en-1",
+        "language": "English",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "A closed circuit lets electric current flow. Opening a switch breaks the circuit and stops the current."
+          }
+        ],
+        "question": "What is the battery voltage?"
+      }
+    },
+    {
+      "id": "fil-supported",
+      "label": "Filipino / supported",
+      "expected": "Napupuputol ang sirkito at humihinto ang daloy ng kuryente.",
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-fil-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Dumadaloy ang kuryente sa saradong sirkito. Kapag binuksan ang switch, napuputol ang sirkito at humihinto ang daloy ng kuryente."
+          }
+        ],
+        "question": "Ano ang nangyayari kapag binuksan ang switch?"
+      }
+    },
+    {
+      "id": "fil-absent",
+      "label": "Filipino / absent",
+      "expected": "State in Filipino that the voltage is not in this lesson.",
+      "request": {
+        "version": 1,
+        "sourceRevision": "setup-fil-1",
+        "language": "Filipino",
+        "pages": [
+          {
+            "id": "page-1",
+            "text": "Dumadaloy ang kuryente sa saradong sirkito. Kapag binuksan ang switch, napuputol ang sirkito at humihinto ang daloy ng kuryente."
+          }
+        ],
+        "question": "Ilang boltahe ang baterya?"
+      }
+    }
+  ],
+  "humanReview": {
+    "method": "Repository review record; browser storage was not changed",
+    "originalFile": "verification/live/browser-1791574644380.json",
+    "date": "2026-10-10",
+    "originalSha256": "caba52875af33de3ad09fad78bf1f3b8becb8dc344fd82c65570fb5553ead7ec",
+    "scope": "All four answers in the referenced production browser export",
+    "statement": "Yes, the answers are fine",
+    "reviewer": "User in this chat"
+  }
+}
